@@ -9,6 +9,7 @@
             <li><a href="{{route('home')}}">Home</a></li>
             <li><a href="#">Categories</a></li>
             <li><a href="#">Features</a></li>
+            <li><a href="{{route('login')}}">Login</a></li>
         </ul><!-- main-menu -->
 
         <div class="src-area">
