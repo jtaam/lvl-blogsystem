@@ -1,12 +1,12 @@
 <header>
     <div class="container-fluid position-relative no-side-padding">
 
-        <a href="#" class="logo"><img src="{{asset('assets/frontend/images/logo.png')}}" alt="{{ config('app.name', 'Laravel') }}"></a>
+        <a href="{{route('home')}}" class="logo"><img src="{{asset('assets/frontend/images/logo.png')}}" alt="{{ config('app.name', 'Laravel') }}"></a>
 
         <div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 
         <ul class="main-menu visible-on-click" id="main-menu">
-            <li><a href="#">Home</a></li>
+            <li><a href="{{route('home')}}">Home</a></li>
             <li><a href="#">Categories</a></li>
             <li><a href="#">Features</a></li>
         </ul><!-- main-menu -->
