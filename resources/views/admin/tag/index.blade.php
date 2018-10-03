@@ -54,8 +54,12 @@
                                         <td>{{$tag->created_at}}</td>
                                         <td>{{$tag->updated_at}}</td>
                                         <td>
-                                            <a href="{{route('admin.tag.edit',$tag->id)}}" class="btn btn-sm btn-info"><i class="material-icons">edit</i><span>Edit</span></a>
-                                            <a href="{{route('admin.tag.destroy',$tag->id)}}" class="btn btn-sm btn-danger"><i class="material-icons">delete</i><span>Delete</span></a>
+                                            <a href="{{route('admin.tag.edit',$tag->id)}}" class="btn btn-sm btn-info waves-effect"><i class="material-icons">edit</i><span>Edit</span></a>
+                                            <button onclick="deleteTag({{$tag->id}});" class="btn btn-sm btn-danger waves-effect"><i class="material-icons">delete</i><span>Delete</span></button>
+                                            <form id="delete-tag-{{$tag->id}}" action="{{route('admin.tag.destroy',$tag->id)}}" method="post" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -83,4 +87,40 @@
     <script src="{{asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
     <!-- Custom Js -->
     <script src="{{asset('assets/backend/js/pages/tables/jquery-datatable.js')}}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.10/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        function deleteTag(id) {
+            const swalWithBootstrapButtons = swal.mixin({
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+            })
+
+            swalWithBootstrapButtons({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    event.preventDefault();
+                    document.getElementById('delete-tag-'+id).submit();
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons(
+                        'Cancelled',
+                        'Your data is safe :)',
+                        'error'
+                    )
+                }
+            })
+
+        }
+    </script>
 @endpush

@@ -100,6 +100,8 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Tag::findOrFail($id)->delete();
+        Toastr::success('Tag deleted successfully!', 'Done');
+        return redirect()->back();
     }
 }
