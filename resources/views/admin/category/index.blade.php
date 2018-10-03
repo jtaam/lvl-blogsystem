@@ -1,10 +1,16 @@
 @extends('layouts.backend.app')
 
-@section('title','Tag')
+@section('title','Category')
 
 @push('css')
     <!-- JQuery DataTable Css -->
     <link href="{{asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
+    <style>
+        .category-slider-image{
+            width: 80px;
+            height: auto;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -19,9 +25,9 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            ALL TAGS
+                            ALL CATEGORIES
                             <span class="pull-right">
-                                <a href="{{route('admin.tag.create')}}" class="btn btn-primary waves-effect"><i class="material-icons">add</i> <span>Add Tag</span></a>
+                                <a href="{{route('admin.category.create')}}" class="btn btn-primary waves-effect"><i class="material-icons">add</i> <span>Add Category</span></a>
                             </span>
                         </h2>
                     </div>
@@ -31,7 +37,8 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Name</th>
+                                        <th>Name
+                                        <th>Image</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>Action</th>
@@ -41,22 +48,24 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Name</th>
+                                        <th>Image</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                @foreach($tags as $key=>$tag)
+                                @foreach($categories as $key=>$category)
                                     <tr>
                                         <td>{{$key+1}}</td>
-                                        <td>{{$tag->name}}</td>
-                                        <td>{{$tag->created_at}}</td>
-                                        <td>{{$tag->updated_at}}</td>
+                                        <td>{{$category->name}}</td>
+                                        <td><img src="{{asset('storage/category/slider/'.$category->image)}}" alt="{{$category->name}}" class="category-slider-image"></td>
+                                        <td>{{$category->created_at}}</td>
+                                        <td>{{$category->updated_at}}</td>
                                         <td>
-                                            <a href="{{route('admin.tag.edit',$tag->id)}}" class="btn btn-sm btn-info waves-effect"><i class="material-icons">edit</i><span>Edit</span></a>
-                                            <button onclick="deleteTag({{$tag->id}});" class="btn btn-sm btn-danger waves-effect"><i class="material-icons">delete</i><span>Delete</span></button>
-                                            <form id="delete-tag-{{$tag->id}}" action="{{route('admin.tag.destroy',$tag->id)}}" method="post" style="display: none;">
+                                            <a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-sm btn-info waves-effect"><i class="material-icons">edit</i><span>Edit</span></a>
+                                            <button onclick="deleteCategory({{$category->id}});" class="btn btn-sm btn-danger waves-effect"><i class="material-icons">delete</i><span>Delete</span></button>
+                                            <form id="delete-category-{{$category->id}}" action="{{route('admin.category.destroy',$category->id)}}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -90,7 +99,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.10/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript">
-        function deleteTag(id) {
+        function deleteCategory(id) {
             const swalWithBootstrapButtons = swal.mixin({
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
@@ -108,7 +117,7 @@
             }).then((result) => {
                 if (result.value) {
                     event.preventDefault();
-                    document.getElementById('delete-tag-'+id).submit();
+                    document.getElementById('delete-category-'+id).submit();
                 } else if (
                     // Read more about handling dismissals
                     result.dismiss === swal.DismissReason.cancel

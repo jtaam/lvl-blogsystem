@@ -56,7 +56,23 @@
                     </ul>
                 </li>
 
+                <li class="{{Request::is('admin/category*')?'active':''}}">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">category</i>
+                        <span>Category</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{{route('admin.category.index')}}">All Categories</a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.category.create')}}">Add Category</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="header">System</li>
+
                 <li class="">
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
