@@ -37,7 +37,13 @@
 
     @stack('css')
 </head>
-<body class="theme-red">
+<body
+        @if(Auth::user()->role_id == 1)
+            class="theme-red"
+        @elseif(Auth::user()->role_id == 2)
+            class="theme-blue"
+        @endif
+>
 
 <!-- Page Loader -->
 <div class="page-loader-wrapper">
