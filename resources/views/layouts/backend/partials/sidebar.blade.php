@@ -11,18 +11,18 @@
                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                 <ul class="dropdown-menu pull-right">
                     <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                            <i class="material-icons">input</i>{{ __('Sign Out') }}
-                        </a>
+                    {{--<li role="separator" class="divider"></li>--}}
+                    {{--<li>--}}
+                        {{--<a class="dropdown-item" href="{{ route('logout') }}"--}}
+                           {{--onclick="event.preventDefault();--}}
+                                                     {{--document.getElementById('logout-form').submit();">--}}
+                            {{--<i class="material-icons">input</i>{{ __('Sign Out') }}--}}
+                        {{--</a>--}}
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </li>
+                        {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                            {{--@csrf--}}
+                        {{--</form>--}}
+                    {{--</li>--}}
                 </ul>
             </div>
         </div>
@@ -40,6 +40,22 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+
+                <li class="{{Request::is('admin/tag*')?'active':''}}">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">label</i>
+                        <span>Tag</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{{route('admin.tag.index')}}">All Tags</a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.tag.create')}}">Add Tag</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="header">System</li>
                 <li class="">
                     <a class="dropdown-item" href="{{ route('logout') }}"

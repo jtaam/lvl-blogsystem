@@ -19,6 +19,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{--Toastr js--}}
+    {{--<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">--}}
 </head>
 <body>
     <div id="app">
@@ -75,5 +77,8 @@
             @yield('content')
         </main>
     </div>
+
+    {{--<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>--}}
+    {{--{!! Toastr::message() !!}--}}
 </body>
 </html>

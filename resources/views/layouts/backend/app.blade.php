@@ -35,6 +35,15 @@
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{asset('assets/backend/css/themes/all-themes.css')}}" rel="stylesheet" />
 
+    {{--Toastr css--}}
+    <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <style>
+        .pull-right {
+            top: 0;
+            position: absolute;
+            right: 0;
+        }
+    </style>
     @stack('css')
 </head>
 <body
@@ -127,11 +136,23 @@
 
 <!-- Custom Js -->
 <script src="{{asset('assets/backend/js/admin.js')}}"></script>
-<script src="{{asset('assets/backend/js/pages/index.js')}}"></script>
+{{--Toastr js--}}
+<script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
+<script>
+    @if($errors->any)
+        @foreach($errors->all() as $error)
+            toastr.error('{{$error}}','Error',{
+                    closeButton:true,
+                    progressBar:true,
+                });
+    @endforeach
+    @endif
+</script>
 
+@stack('js')
 <!-- Demo Js -->
 <script src="{{asset('assets/backend/js/demo.js')}}"></script>
 
-    @stack('js')
 </body>
 </html>
