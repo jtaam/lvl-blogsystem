@@ -1,10 +1,11 @@
 @extends('layouts.backend.app')
 
-@section('title','Tag')
+@section('title','Category')
 
 @push('css')
     <!-- JQuery DataTable Css -->
     <link href="{{asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
+
 @endpush
 
 @section('content')
@@ -15,23 +16,27 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            EDIT TAG
+                            EDIT CATEGORY
                         </h2>
                     </div>
-                    <div class="body">
-                        <form action="{{route('admin.tag.update',$tag->id)}}" method="post">
+                    <p class="body">
+                        <form action="{{route('admin.category.update',$category->id)}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" id="name" class="form-control" name="name" value="{{$tag->name}}">
-                                    <label class="form-label">Tag Name</label>
+                                    <input type="text" id="name" class="form-control" name="name" value="{{$category->name}}">
+                                    <label class="form-label">Category Name</label>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <div class="form-control">
+                                    <input type="file" name="image" id="image">
+                                </div>
+                            </div>
                             <br>
-                            <a href="{{route('admin.tag.index')}}" type="button" class="btn btn-warning m-t-15 waves-effect">BACK</a>
-                            <button type="submit" class="btn btn-primary m-t-15 waves-effect">SAVE</button>
+                            <a href="{{route('admin.category.index')}}" type="button" class="btn btn-warning m-t-15 waves-effect">BACK</a>
+                            <button type="submit" class="btn btn-primary m-t-15 waves-effect">UPDATE</button>
                         </form>
                     </div>
                 </div>

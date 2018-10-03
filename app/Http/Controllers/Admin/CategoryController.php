@@ -102,7 +102,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -114,7 +115,54 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'image' => 'mimes:jpeg,jpg,png,gif'
+        ]);
+        // get form image
+        $image = $request->file('image');
+        $slug = str_slug($request->name);
+        $category = Category::findOrFail($id);
+        if (isset($image)) {
+            // make unique name for image
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+//            check category directory existence
+            if (!Storage::disk('public')->exists('category')) {
+                Storage::disk('public')->makeDirectory('category');
+            }
+            // delete old image
+            if (Storage::disk('public')->exists('category/'.$category->image)){
+                Storage::disk('public')->delete('category/'.$category->image);
+            }
+            // resize image for category
+            $category_img = Image::make($image)->resize(1600, 479)->save();
+            // save/upload image to directory
+            Storage::disk('public')->put('category/' . $imagename, $category_img);
+
+            //            check category sliders directory existence
+            if (!Storage::disk('public')->exists('category/slider')) {
+                Storage::disk('public')->makeDirectory('category/slider');
+            }
+            // delete old slider image
+            if (Storage::disk('public')->exists('category/slider/'.$category->image)){
+                Storage::disk('public')->delete('category/slider/'.$category->image);
+            }
+            // resize image for category slider
+            $slider_img = Image::make($image)->resize(500, 333)->save();
+            // save/upload image to slider directory
+            Storage::disk('public')->put('category/slider/' . $imagename, $slider_img);
+        } else {
+            $imagename = $category->image;
+        }
+
+        $category->name = $request->name;
+        $category->slug = $slug;
+        $category->image = $imagename;
+        $category->save();
+        Toastr::success('Category updated successfully!', 'Done');
+
+        return redirect()->route('admin.category.index');
     }
 
     /**
