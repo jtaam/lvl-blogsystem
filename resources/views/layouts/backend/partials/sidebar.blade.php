@@ -32,12 +32,50 @@
     <div class="menu">
         <ul class="list">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active">
-                <a href="{{route('admin.dashboard')}}">
-                    <i class="material-icons">home</i>
-                    <span>Home</span>
-                </a>
-            </li>
+            {{--Admin dashboard--}}
+            @if(Request::is('admin*'))
+                <li class="{{Request::is('admin/dashboard')?'active':''}}">
+                    <a href="{{route('admin.dashboard')}}">
+                        <i class="material-icons">dashboard</i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="header">System</li>
+                <li class="">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        <i class="material-icons">input</i><span>{{ __('Logout') }}</span>
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            @endif
+            {{--Author dashboard--}}
+            @if(Request::is('author*'))
+                <li class="{{Request::is('author/dashboard')?'active':''}}">
+                    <a href="{{route('author.dashboard')}}">
+                        <i class="material-icons">dashboard</i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="header">System</li>
+                <li class="">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        <i class="material-icons">input</i><span>{{ __('Logout') }}</span>
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            @endif
+
+
             <li>
                 <a href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">swap_calls</i>
