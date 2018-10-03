@@ -39,9 +39,9 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <style>
         .pull-right {
-            top: 0;
+            top: 18%;
             position: absolute;
-            right: 0;
+            right: 1%;
         }
     </style>
     @stack('css')
