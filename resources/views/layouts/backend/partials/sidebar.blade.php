@@ -71,6 +71,21 @@
                     </ul>
                 </li>
 
+                <li class="{{Request::is('admin/post*')?'active':''}}">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">library_books</i>
+                        <span>Posts</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{{route('admin.post.index')}}">All Posts</a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.post.create')}}">Add Post</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="header">System</li>
 
                 <li class="">

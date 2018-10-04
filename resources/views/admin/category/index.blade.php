@@ -26,6 +26,7 @@
                     <div class="header">
                         <h2>
                             ALL CATEGORIES
+                            <span class="badge bg-red">{{$categories->count()}}</span>
                             <span class="pull-right">
                                 <a href="{{route('admin.category.create')}}" class="btn btn-primary waves-effect"><i class="material-icons">add</i> <span>Add Category</span></a>
                             </span>
@@ -36,8 +37,9 @@
                             <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Name
+                                        <th>Serial</th>
+                                        <th>Name</th>
+                                        <th>Posts Count</th>
                                         <th>Image</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
@@ -46,8 +48,9 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Id</th>
+                                        <th>Serial</th>
                                         <th>Name</th>
+                                        <th>Posts Count</th>
                                         <th>Image</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
@@ -59,6 +62,7 @@
                                     <tr>
                                         <td>{{$key+1}}</td>
                                         <td>{{$category->name}}</td>
+                                        <td>{{$category->posts->count()}}</td>
                                         <td><img src="{{asset('storage/category/slider/'.$category->image)}}" alt="{{$category->name}}" class="category-slider-image"></td>
                                         <td>{{$category->created_at}}</td>
                                         <td>{{$category->updated_at}}</td>
