@@ -108,6 +108,22 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+
+                <li class="{{Request::is('author/post*')?'active':''}}">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">library_books</i>
+                        <span>Posts</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{{route('author.post.index')}}">All Posts</a>
+                        </li>
+                        <li>
+                            <a href="{{route('author.post.create')}}">Add Post</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="header">System</li>
                 <li class="">
                     <a class="dropdown-item" href="{{ route('logout') }}"

@@ -37,7 +37,7 @@
                             <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
-                                        <th>Serial</th>
+                                        <th class="text-center">Serial</th>
                                         <th>Title</th>
                                         <th>Image</th>
                                         <th>Created At</th>
@@ -47,7 +47,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Serial</th>
+                                        <th class="text-center">Serial</th>
                                         <th>Title</th>
                                         <th>Image</th>
                                         <th>Created At</th>
@@ -58,7 +58,7 @@
                                 <tbody>
                                 @foreach($category->posts as $key=>$post)
                                     <tr>
-                                        <td>{{$key+1}}</td>
+                                        <td class="text-center">{{$key+1}}</td>
                                         <td>{{$post->title}}</td>
                                         <td><img src="{{Storage::disk('public')->url('post/'.$post->image)}}" alt="{{$post->image}}" class="category-slider-image"></td>
                                         <td>{{$post->created_at}}</td>

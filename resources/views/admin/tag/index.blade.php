@@ -31,7 +31,7 @@
                             <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
-                                        <th>Serial</th>
+                                        <th class="text-center">Serial</th>
                                         <th>Name</th>
                                         <th>Posts Count</th>
                                         <th>Created At</th>
@@ -41,7 +41,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Serial</th>
+                                        <th class="text-center">Serial</th>
                                         <th>Name</th>
                                         <th>Posts Count</th>
                                         <th>Created At</th>
@@ -52,9 +52,9 @@
                                 <tbody>
                                 @foreach($tags as $key=>$tag)
                                     <tr>
-                                        <td>{{$key+1}}</td>
+                                        <td class="text-center">{{$key+1}}</td>
                                         <td>{{$tag->name}}</td>
-                                        <td>{{$tag->posts->count()}}</td>
+                                        <td class="text-center">{{$tag->posts->count()}}</td>
                                         <td>{{$tag->created_at}}</td>
                                         <td>{{$tag->updated_at}}</td>
                                         <td>
