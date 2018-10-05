@@ -10,15 +10,7 @@
 
     <!-- Multi Select Css -->
     {{--<link href="{{asset('assets/backend/plugins/multi-select/css/multi-select.css')}}" rel="stylesheet">--}}
-    <style>
-        .post-image img{
-            width: 190px;
-            height: auto;
-            top: -60px;
-            position: relative;
-            right: 100px;
-        }
-    </style>
+
 @endpush
 
 @section('content')
@@ -43,11 +35,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="image">Featured Image</label>
-                                <input type="file" name="image" id="image">
-                                <div class="post-image">
-                                    <img src="{{asset('storage/post/'.$post->image)}}" alt="{{$post->slug}}" class="img-responsive img-thumbnail">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="image">Featured Image</label>
+                                        <input type="file" name="image" id="image">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div>
+                                            <img src="{{asset('storage/post/'.$post->image)}}" alt="{{$post->slug}}" class="img-responsive img-thumbnail">
+                                        </div>
+                                    </div>
                                 </div>
+
+
                             </div>
 
                             <div class="form-group">
