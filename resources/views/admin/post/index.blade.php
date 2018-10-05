@@ -5,18 +5,12 @@
 @push('css')
     <!-- JQuery DataTable Css -->
     <link href="{{asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
-    <style>
-        .btn-group-xs > .btn, .btn-xs {
-            padding  : .25rem .4rem;
-            font-size  : .875rem;
-            line-height  : .5;
-            border-radius : .2rem;
-        }
-    </style>
+
 @endpush
 
 @section('content')
     <div class="container-fluid">
+
         <div class="block-header">
 
         </div>
@@ -46,7 +40,7 @@
                                         <th><i class="material-icons">visibility</i></th>
                                         <th>Status</th>
                                         <th>Created At</th>
-                                        <th>Updated At</th>
+                                        {{--<th>Updated At</th>--}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -59,7 +53,7 @@
                                         <th><i class="material-icons">visibility</i></th>
                                         <th>Status</th>
                                         <th>Created At</th>
-                                        <th>Updated At</th>
+                                        {{--<th>Updated At</th>--}}
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -76,7 +70,7 @@
                                                 <span class="badge bg-pink">Pending</span>
                                             @endif
                                         </td>
-                                        <td>{{$post->view_count}}</td>
+                                        <td class="text-center">{{$post->view_count}}</td>
                                         <td>
                                             @if($post->status == true)
                                                 <span class="badge bg-green">Published</span>
@@ -85,8 +79,9 @@
                                             @endif
                                         </td>
                                         <td>{{$post->created_at}}</td>
-                                        <td>{{$post->updated_at}}</td>
+                                        {{--<td>{{$post->updated_at}}</td>--}}
                                         <td>
+                                            <a href="{{route('admin.post.show',$post->id)}}" class="btn btn-sm btn-success waves-effect"><i class="material-icons">visibility</i></a>
                                             <a href="{{route('admin.post.edit',$post->id)}}" class="btn btn-sm btn-info waves-effect"><i class="material-icons">edit</i></a>
                                             <button onclick="deletePost({{$post->id}});" class="btn btn-sm btn-danger waves-effect"><i class="material-icons">delete</i></button>
                                             <form id="delete-post-{{$post->id}}" action="{{route('admin.category.destroy',$post->id)}}" method="post" style="display: none;">
