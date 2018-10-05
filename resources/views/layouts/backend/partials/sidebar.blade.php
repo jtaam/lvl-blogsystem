@@ -83,6 +83,9 @@
                         <li>
                             <a href="{{route('admin.post.create')}}">Add Post</a>
                         </li>
+                        <li>
+                            <a href="{{route('admin.post.pending')}}">Pending Posts</a>
+                        </li>
                     </ul>
                 </li>
 
