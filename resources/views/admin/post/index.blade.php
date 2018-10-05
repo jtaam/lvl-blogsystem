@@ -84,7 +84,7 @@
                                             <a href="{{route('admin.post.show',$post->id)}}" class="btn btn-sm btn-success waves-effect"><i class="material-icons">visibility</i></a>
                                             <a href="{{route('admin.post.edit',$post->id)}}" class="btn btn-sm btn-info waves-effect"><i class="material-icons">edit</i></a>
                                             <button onclick="deletePost({{$post->id}});" class="btn btn-sm btn-danger waves-effect"><i class="material-icons">delete</i></button>
-                                            <form id="delete-post-{{$post->id}}" action="{{route('admin.category.destroy',$post->id)}}" method="post" style="display: none;">
+                                            <form id="delete-post-{{$post->id}}" action="{{route('admin.post.destroy',$post->id)}}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -136,7 +136,7 @@
             }).then((result) => {
                 if (result.value) {
                     event.preventDefault();
-                    document.getElementById('delete-category-'+id).submit();
+                    document.getElementById('delete-post-'+id).submit();
                 } else if (
                     // Read more about handling dismissals
                     result.dismiss === swal.DismissReason.cancel
