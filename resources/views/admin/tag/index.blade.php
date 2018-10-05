@@ -58,8 +58,9 @@
                                         <td>{{$tag->created_at}}</td>
                                         <td>{{$tag->updated_at}}</td>
                                         <td>
-                                            <a href="{{route('admin.tag.edit',$tag->id)}}" class="btn btn-sm btn-info waves-effect"><i class="material-icons">edit</i><span>Edit</span></a>
-                                            <button onclick="deleteTag({{$tag->id}});" class="btn btn-sm btn-danger waves-effect"><i class="material-icons">delete</i><span>Delete</span></button>
+                                            <a href="{{route('admin.tag.show',$tag->id)}}" class="btn btn-sm btn-success waves-effect"><i class="material-icons">visibility</i><span></span></a>
+                                            <a href="{{route('admin.tag.edit',$tag->id)}}" class="btn btn-sm btn-info waves-effect"><i class="material-icons">edit</i><span></span></a>
+                                            <button onclick="deleteTag({{$tag->id}});" class="btn btn-sm btn-danger waves-effect"><i class="material-icons">delete</i><span></span></button>
                                             <form id="delete-tag-{{$tag->id}}" action="{{route('admin.tag.destroy',$tag->id)}}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')

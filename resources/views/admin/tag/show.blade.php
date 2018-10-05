@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title','Category')
+@section('title','Tag')
 
 @push('css')
     <!-- JQuery DataTable Css -->
@@ -25,10 +25,10 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            POSTS IN {{strtoupper(trans($category->name))}}
-                            <span class="badge bg-red">{{$category->posts->count()}}</span>
+                            POSTS IN {{strtoupper(trans($tag->name))}}
+                            <span class="badge bg-red"></span>
                             <span class="pull-right">
-                                <a href="{{route('admin.category.index')}}" class="btn btn-warning waves-effect"><i class="material-icons">arrow_back</i> <span>Back</span></a>
+                                <a href="{{route('admin.tag.index')}}" class="btn btn-warning waves-effect"><i class="material-icons">arrow_back</i> <span>Back</span></a>
                             </span>
                         </h2>
                     </div>
@@ -56,7 +56,7 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                @foreach($category->posts as $key=>$post)
+                                @foreach($tag->posts as $key=>$post)
                                     <tr>
                                         <td>{{$key+1}}</td>
                                         <td>{{$post->title}}</td>
