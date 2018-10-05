@@ -48,10 +48,10 @@
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="{{route('admin.tag.index')}}">All Tags</a>
+                            <a href="{{route('admin.tag.index')}}"><i class="material-icons">bookmarks</i><span>All Tags</span></a>
                         </li>
                         <li>
-                            <a href="{{route('admin.tag.create')}}">Add Tag</a>
+                            <a href="{{route('admin.tag.create')}}"><i class="material-icons">playlist_add</i><span>Add Tag</span></a>
                         </li>
                     </ul>
                 </li>
@@ -63,10 +63,10 @@
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="{{route('admin.category.index')}}">All Categories</a>
+                            <a href="{{route('admin.category.index')}}"><i class="material-icons">view_list</i><span>All Categories</span></a>
                         </li>
                         <li>
-                            <a href="{{route('admin.category.create')}}">Add Category</a>
+                            <a href="{{route('admin.category.create')}}"><i class="material-icons">add_photo_alternate</i><span>Add Category</span></a>
                         </li>
                     </ul>
                 </li>
@@ -78,13 +78,13 @@
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="{{route('admin.post.index')}}">All Posts</a>
+                            <a href="{{route('admin.post.index')}}"><i class="material-icons">featured_play_list</i><span>All Posts</span></a>
                         </li>
                         <li>
-                            <a href="{{route('admin.post.create')}}">Add Post</a>
+                            <a href="{{route('admin.post.create')}}"><i class="material-icons">note_add</i><span>Add Post</span></a>
                         </li>
                         <li>
-                            <a href="{{route('admin.post.pending')}}">Pending Posts</a>
+                            <a href="{{route('admin.post.pending')}}"><i class="material-icons">notification_important</i><span>Pending Posts</span></a>
                         </li>
                     </ul>
                 </li>
@@ -119,10 +119,10 @@
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="{{route('author.post.index')}}">All Posts</a>
+                            <a href="{{route('author.post.index')}}"><i class="material-icons">featured_play_list</i><span>All Posts</span></a>
                         </li>
                         <li>
-                            <a href="{{route('author.post.create')}}">Add Post</a>
+                            <a href="{{route('author.post.create')}}"><i class="material-icons">note_add</i><span>Add Post</span></a>
                         </li>
                     </ul>
                 </li>
