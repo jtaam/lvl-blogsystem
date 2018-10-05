@@ -15,7 +15,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <form action="{{route('admin.post.update',$post->id)}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('author.post.update',$post->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="row clearfix">
@@ -113,7 +113,7 @@
                         <div class="body">
                             <textarea name="body" id="tinymce">{{$post->body}}</textarea>
                             <br>
-                            <a href="{{route('admin.post.index')}}" type="button" class="btn btn-warning m-t-15 waves-effect">CANCEL</a>
+                            <a href="{{route('author.post.index')}}" type="button" class="btn btn-warning m-t-15 waves-effect">CANCEL</a>
                             <button type="submit" class="btn btn-primary m-t-15 waves-effect">UPDATE</button>
                         </div>
                     </div>
