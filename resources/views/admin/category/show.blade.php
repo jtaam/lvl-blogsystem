@@ -25,10 +25,10 @@
                 <div class="card">
                     <div class="header">
                         <h2>
-                            ALL CATEGORIES
-                            <span class="badge bg-red">{{$categories->count()}}</span>
+                            POST IN {{strtoupper(trans($category->name))}}
+                            <span class="badge bg-red">{{$category->posts->count()}}</span>
                             <span class="pull-right">
-                                <a href="{{route('admin.category.create')}}" class="btn btn-primary waves-effect"><i class="material-icons">add</i> <span>Add Category</span></a>
+                                <a href="{{route('admin.category.index')}}" class="btn btn-warning waves-effect"><i class="material-icons">arrow_back</i> <span>Back</span></a>
                             </span>
                         </h2>
                     </div>
@@ -38,39 +38,42 @@
                                 <thead>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Name</th>
-                                        <th>Posts Count</th>
+                                        <th>Title</th>
                                         <th>Image</th>
                                         <th>Created At</th>
-                                        <th>Updated At</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>Serial</th>
-                                        <th>Name</th>
-                                        <th>Posts Count</th>
+                                        <th>Title</th>
                                         <th>Image</th>
                                         <th>Created At</th>
-                                        <th>Updated At</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                @foreach($categories as $key=>$category)
+                                @foreach($category->posts as $key=>$post)
                                     <tr>
                                         <td>{{$key+1}}</td>
-                                        <td>{{$category->name}}</td>
-                                        <td>{{$category->posts->count()}}</td>
-                                        <td><img src="{{asset('storage/category/slider/'.$category->image)}}" alt="{{$category->name}}" class="category-slider-image"></td>
-                                        <td>{{$category->created_at}}</td>
-                                        <td>{{$category->updated_at}}</td>
+                                        <td>{{$post->title}}</td>
+                                        <td><img src="{{Storage::disk('public')->url('post/'.$post->image)}}" alt="{{$post->image}}" class="category-slider-image"></td>
+                                        <td>{{$post->created_at}}</td>
                                         <td>
-                                            <a href="{{route('admin.category.show',$category->id)}}" class="btn btn-sm btn-success waves-effect"><i class="material-icons">visibility</i><span></span></a>
-                                            <a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-sm btn-info waves-effect"><i class="material-icons">edit</i><span></span></a>
-                                            <button onclick="deleteCategory({{$category->id}});" class="btn btn-sm btn-danger waves-effect"><i class="material-icons">delete</i><span></span></button>
-                                            <form id="delete-category-{{$category->id}}" action="{{route('admin.category.destroy',$category->id)}}" method="post" style="display: none;">
+                                            @if($post->status == true)
+                                                <span class="badge bg-green">Published</span>
+                                            @else
+                                                <span class="badge bg-pink">Pending</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{route('admin.post.show',$post->id)}}" class="btn btn-sm btn-success waves-effect"><i class="material-icons">visibility</i><span></span></a>
+                                            <a href="{{route('admin.post.edit',$post->id)}}" class="btn btn-sm btn-info waves-effect"><i class="material-icons">edit</i><span></span></a>
+                                            <button onclick="deletePost({{$post->id}});" class="btn btn-sm btn-danger waves-effect"><i class="material-icons">delete</i><span></span></button>
+                                            <form id="delete-post-{{$post->id}}" action="{{route('admin.post.destroy',$post->id)}}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -104,7 +107,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.10/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript">
-        function deleteCategory(id) {
+        function deletePost(id) {
             const swalWithBootstrapButtons = swal.mixin({
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
@@ -122,7 +125,7 @@
             }).then((result) => {
                 if (result.value) {
                     event.preventDefault();
-                    document.getElementById('delete-category-'+id).submit();
+                    document.getElementById('delete-post-'+id).submit();
                 } else if (
                     // Read more about handling dismissals
                     result.dismiss === swal.DismissReason.cancel

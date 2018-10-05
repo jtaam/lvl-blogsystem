@@ -21,7 +21,7 @@
 @section('content')
     <div class="container-fluid">
         <p class="approved">
-            <a href="{{route('admin.post.index')}}" class="btn btn-lg btn-warning waves-effect">Back</a>
+            <a href="{{route('admin.post.index')}}" class="btn btn-lg btn-warning waves-effect">ALL POSTS</a>
             @if($post->is_approved == false)
                 <button type="button" class="btn btn-success">
                     <i class="material-icons">done</i>
