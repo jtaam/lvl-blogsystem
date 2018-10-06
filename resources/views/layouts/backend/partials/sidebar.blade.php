@@ -71,7 +71,7 @@
                     </ul>
                 </li>
 
-                <li class="{{Request::is('admin/post*')?'active':''}}">
+                <li class="{{Request::is('admin/*post*')?'active':''}}">
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">library_books</i>
                         <span>Posts</span>
