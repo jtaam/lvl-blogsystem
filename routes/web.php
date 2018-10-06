@@ -3,6 +3,8 @@
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+//Subscriber
+Route::post('subscriber','SubscriberController@store')->name('subscriber.store');
 
 Auth::routes();
 
