@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewPostSubscriber extends Notification
+class NewPostSubscriber extends Notification implements ShouldQueue
 {
     use Queueable;
     public $post;
