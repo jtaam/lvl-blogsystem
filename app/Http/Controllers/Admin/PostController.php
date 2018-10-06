@@ -213,6 +213,12 @@ class PostController extends Controller
 
             $post->user->notify(new AuthorPostApproved($post));
 
+            $subscribers = Subscriber::all();
+            foreach ($subscribers as $subscriber){
+                Notification::route('mail',$subscriber->email)
+                    ->notify(new NewPostSubscriber($post));
+            }
+
             Toastr::success('Post approved succesfully!','Done');
         }else{
             Toastr::info('This post is already approved!','Info');
