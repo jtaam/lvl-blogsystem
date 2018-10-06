@@ -89,7 +89,7 @@
                     </ul>
                 </li>
 
-                <li class="{{Request::is('admin/subscriber*')?'active':''}}">
+                <li class="{{Request::is('admin/subscriber')?'active':''}}">
                     <a href="{{route('admin.subscriber.index')}}" class="">
                         <i class="material-icons">email</i>
                         <span>Subscribers</span>
@@ -97,6 +97,13 @@
                 </li>
 
                 <li class="header">System</li>
+
+                <li class="{{Request::is('admin/settings')?'active':''}}">
+                    <a href="{{route('admin.settings')}}" class="">
+                        <i class="material-icons">settings</i>
+                        <span>Settings</span>
+                    </a>
+                </li>
 
                 <li class="">
                     <a class="dropdown-item" href="{{ route('logout') }}"

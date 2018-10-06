@@ -24,9 +24,16 @@
                 <div class="footer-section">
                     <h4 class="title"><b>CATAGORIES</b></h4>
                     <ul>
-                        @foreach($categories as $category)
-                        <li><a href="#">{{strtoupper($category->name)}}</a></li>
-                        @endforeach
+                        {{--@foreach($categories as $category)--}}
+                        {{--<li><a href="#">{{strtoupper($category->name)}}</a></li>--}}
+                        {{--@endforeach--}}
+                        <li><a href="#">CATEGORY</a></li>
+                        <li><a href="#">CATEGORY</a></li>
+                        <li><a href="#">CATEGORY</a></li>
+                        <li><a href="#">CATEGORY</a></li>
+                        <li><a href="#">CATEGORY</a></li>
+                        <li><a href="#">CATEGORY</a></li>
+                        <li><a href="#">CATEGORY</a></li>
                     </ul>
                 </div><!-- footer-section -->
             </div><!-- col-lg-4 col-md-6 -->
