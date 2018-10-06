@@ -16,6 +16,8 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::resource('post','PostController');
     Route::get('pending/post','PostController@pending')->name('post.pending');
     Route::put('/post/{id}/approve','PostController@approval')->name('post.approve');
+    Route::get('/subscriber','SubscriberController@index')->name('subscriber.index');
+    Route::delete('/subscriber/{id}','SubscriberController@destroy')->name('subscriber.destroy');
 });
 // Author route group
 Route::group(['as'=>'author.','prefix'=>'author','namespace'=>'Author','middleware'=>['auth','author']], function(){
