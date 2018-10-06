@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/', 'HomeController@index')->name('home');
+//Route::get('/post/{$id}/show', 'HomeController@show')->name('home');
 //Subscriber
 Route::post('subscriber','SubscriberController@store')->name('subscriber.store');
 

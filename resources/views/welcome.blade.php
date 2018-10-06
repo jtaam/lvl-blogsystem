@@ -47,14 +47,13 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{asset('assets/frontend/images/marion-michele-330691.jpg')}}" alt="Blog Image"></div>
+                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[0]->image)}}" alt="{{$posts[0]->title}}"></div>
 
                             <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
 
                             <div class="blog-info">
 
-                                <h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
+                                <h4 class="title"><a href="#"><b>{{ucwords($posts[0]->title)}}</b></a></h4>
 
                                 <ul class="post-footer">
                                     <li><a href="#"><i class="ion-heart"></i>57</a></li>
@@ -71,13 +70,12 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{asset('assets/frontend/images/audrey-jackson-260657.jpg')}}" alt="Blog Image"></div>
+                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[1]->image)}}" alt="{{$posts[1]->title}}"></div>
 
                             <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
 
                             <div class="blog-info">
-                                <h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
+                                <h4 class="title"><a href="#"><b>{{ucwords($posts[1]->title)}}</b></a></h4>
 
                                 <ul class="post-footer">
                                     <li><a href="#"><i class="ion-heart"></i>57</a></li>
@@ -95,12 +93,11 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{asset('assets/frontend/images/pexels-photo-370474.jpeg')}}" alt="Blog Image"></div>
+                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[2]->image)}}" alt="{{$posts[2]->title}}"></div>
 
                             <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/averie-woodard-319832.jpg')}}" alt="Profile Image"></a>
 
-                            <h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                        Concepts in Physics?</b></a></h4>
+                            <h4 class="title"><a href="#"><b>{{ucwords($posts[2]->title)}}</b></a></h4>
 
                             <ul class="post-footer">
                                 <li><a href="#"><i class="ion-heart"></i>57</a></li>
@@ -116,23 +113,25 @@
                     <div class="card h-100">
                         <div class="single-post post-style-2">
 
-                            <div class="blog-image"><img src="{{asset('assets/frontend/images/brooke-lark-194251.jpg')}}" alt="Blog Image"></div>
+                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[3]->image)}}" alt="{{$posts[3]->title}}"></div>
 
                             <div class="blog-info">
 
-                                <h6 class="pre-title"><a href="#"><b>HEALTH</b></a></h6>
+                                <h6 class="pre-title">
+                                    @foreach($posts[3]->categories as $category)
+                                        <a href="#"><b>{{strtoupper($category->name)}}</b></a>
+                                    @endforeach
+                                </h6>
 
-                                <h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
+                                <h4 class="title"><a href="#"><b>{{ucwords($posts[3]->title)}}</b></a></h4>
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                                <p>{!!str_limit($posts[3]->body,155,'')!!}</p>
 
                                 <div class="avatar-area">
                                     <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
                                     <div class="right-area">
-                                        <a class="name" href="#"><b>Lora Plamer</b></a>
-                                        <h6 class="date" href="#">on Sep 29, 2017 at 9:48am</h6>
+                                        <a class="name" href="#"><b>{{$posts[3]->user->name}}</b></a>
+                                        <h6 class="date" href="#">on {{$posts[3]->created_at->format('M d, Y')}} at {{$posts[3]->created_at->format('g:ia')}}</h6>
                                     </div>
                                 </div>
 
@@ -153,12 +152,11 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{asset('assets/frontend/images/dmitri-popov-326976.jpg')}}" alt="Blog Image"></div>
+                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[4]->image)}}" alt="{{$posts[4]->title}}"></div>
 
                             <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/averie-woodard-319832.jpg')}}" alt="Profile Image"></a>
 
-                            <h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                        Concepts in Physics?</b></a></h4>
+                            <h4 class="title"><a href="#"><b>{{ucwords($posts[4]->title)}}</b></a></h4>
 
                             <ul class="post-footer">
                                 <li><a href="#"><i class="ion-heart"></i>57</a></li>
@@ -177,19 +175,20 @@
 
                             <div class="blog-info">
 
-                                <h6 class="pre-title"><a href="#"><b>HEALTH</b></a></h6>
+                                <h6 class="pre-title">
+                                    @foreach($posts[5]->categories as $category)
+                                        <a href="#"><b>{{strtoupper($category->name)}}</b></a>
+                                    @endforeach
+                                </h6>
+                                <h4 class="title"><a href="#"><b>{{$posts[5]->title}}</b></a></h4>
 
-                                <h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                                <p>{!! str_limit($posts[5]->body,155,'') !!}</p>
 
                                 <div class="avatar-area">
                                     <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
                                     <div class="right-area">
-                                        <a class="name" href="#"><b>Lora Plamer</b></a>
-                                        <h6 class="date" href="#">on Sep 29, 2017 at 9:48am</h6>
+                                        <a class="name" href="#"><b>{{$posts[5]->user->name}}</b></a>
+                                        <h6 class="date" href="#">on {{$posts[5]->created_at->format('M d, Y')}} at {{$posts[3]->created_at->format('g:ia')}}</h6>
                                     </div>
                                 </div>
 
@@ -210,13 +209,12 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{asset('assets/frontend/images/ben-o-sullivan-382817.jpg')}}" alt="Blog Image"></div>
+                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[4]->image)}}" alt="{{$posts[4]->title}}"></div>
 
                             <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
 
                             <div class="blog-info">
-                                <h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
+                                <h4 class="title"><a href="#"><b>{{ucwords($posts[4]->title)}}</b></a></h4>
 
                                 <ul class="post-footer">
                                     <li><a href="#"><i class="ion-heart"></i>57</a></li>
@@ -236,8 +234,7 @@
                         <div class="single-post post-style-4">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
+                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[5]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
@@ -251,8 +248,7 @@
                         <div class="single-post">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
+                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[6]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
@@ -272,8 +268,7 @@
                         <div class="single-post post-style-4">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
+                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[7]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
@@ -287,8 +282,7 @@
                         <div class="single-post">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
+                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[8]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
@@ -306,23 +300,26 @@
                     <div class="card h-100">
                         <div class="single-post post-style-2">
 
-                            <div class="blog-image"><img src="{{asset('assets/frontend/images/icons8-team-355990.jpg')}}" alt="Blog Image"></div>
+                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[9]->image)}}" alt="{{$posts[9]->title}}"></div>
 
                             <div class="blog-info">
 
-                                <h6 class="pre-title"><a href="#"><b>HEALTH</b></a></h6>
+                                <h6 class="pre-title">
+                                    @foreach($posts[5]->categories as $category)
+                                        <a href="#"><b>{{strtoupper($category->name)}}</b></a>
+                                    @endforeach
+                                </h6>
 
-                                <h4 class="title"><a href="#"><b>How Did Van Gogh's Turbulent Mind Depict One of the Most Complex
-                                            Concepts in Physics?</b></a></h4>
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                                <h4 class="title"><a href="#"><b>{{ucwords($posts[9]->title)}}</b></a></h4>
+
+                                <p>{!! str_limit($posts[9]->body,155,'') !!}</p>
 
                                 <div class="avatar-area">
                                     <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
                                     <div class="right-area">
-                                        <a class="name" href="#"><b>Lora Plamer</b></a>
-                                        <h6 class="date" href="#">on Sep 29, 2017 at 9:48am</h6>
+                                        <a class="name" href="#"><b>{{$posts[9]->user->name}}</b></a>
+                                        <h6 class="date" href="#">on {{$posts[5]->created_at->format('M d, Y')}} at {{$posts[3]->created_at->format('g:ia')}}</h6>
                                     </div>
                                 </div>
 
