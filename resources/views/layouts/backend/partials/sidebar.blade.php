@@ -2,7 +2,7 @@
     <!-- User Info -->
     <div class="user-info">
         <div class="image">
-            <img src="{{asset('assets/backend/images/user.png')}}" width="48" height="48" alt="User" />
+            <img src="{{Storage::disk('public')->url('profile/'.Auth::user()->image)}}" width="48" height="48" alt="User" />
         </div>
         <div class="info-container">
             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}</div>
@@ -10,19 +10,22 @@
             <div class="btn-group user-helper-dropdown">
                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                 <ul class="dropdown-menu pull-right">
-                    <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                    {{--<li role="separator" class="divider"></li>--}}
-                    {{--<li>--}}
-                        {{--<a class="dropdown-item" href="{{ route('logout') }}"--}}
-                           {{--onclick="event.preventDefault();--}}
-                                                     {{--document.getElementById('logout-form').submit();">--}}
-                            {{--<i class="material-icons">input</i>{{ __('Sign Out') }}--}}
-                        {{--</a>--}}
 
-                        {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                            {{--@csrf--}}
-                        {{--</form>--}}
-                    {{--</li>--}}
+                    <li><a href="{{Auth::user()->role->id==1 ? route('admin.settings'):route('author.settings')}}"><i class="material-icons">settings</i>Settings</a></li>
+
+                    <li role="separator" class="divider"></li>
+                    {{--LOGOUT--}}
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form-1').submit();">
+                            <i class="material-icons">input</i>{{ __('Sign Out') }}
+                        </a>
+
+                        <form id="logout-form-1" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -40,7 +43,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-
+                {{--TAG--}}
                 <li class="{{Request::is('admin/tag*')?'active':''}}">
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">label</i>
@@ -55,7 +58,7 @@
                         </li>
                     </ul>
                 </li>
-
+                {{--CATEGORY--}}
                 <li class="{{Request::is('admin/category*')?'active':''}}">
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">category</i>
@@ -70,7 +73,7 @@
                         </li>
                     </ul>
                 </li>
-
+                {{--POST--}}
                 <li class="{{Request::is('admin/*post*')?'active':''}}">
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">library_books</i>
@@ -88,7 +91,7 @@
                         </li>
                     </ul>
                 </li>
-
+                {{--SUBSCRIBER--}}
                 <li class="{{Request::is('admin/subscriber')?'active':''}}">
                     <a href="{{route('admin.subscriber.index')}}" class="">
                         <i class="material-icons">email</i>
@@ -97,22 +100,22 @@
                 </li>
 
                 <li class="header">System</li>
-
+                {{--SETTINGS--}}
                 <li class="{{Request::is('admin/settings')?'active':''}}">
                     <a href="{{route('admin.settings')}}" class="">
                         <i class="material-icons">settings</i>
                         <span>Settings</span>
                     </a>
                 </li>
-
+                {{--LOGOUT--}}
                 <li class="">
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form-2').submit();">
                         <i class="material-icons">input</i><span>{{ __('Logout') }}</span>
                     </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form-2" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
                 </li>
@@ -125,7 +128,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-
+                {{--POST--}}
                 <li class="{{Request::is('author/post*')?'active':''}}">
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">library_books</i>
@@ -142,14 +145,22 @@
                 </li>
 
                 <li class="header">System</li>
+                {{--SETTINGS--}}
+                <li class="{{Request::is('author/settings')?'active':''}}">
+                    <a href="{{route('author.settings')}}" class="">
+                        <i class="material-icons">settings</i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                {{--LOGOUT--}}
                 <li class="">
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form-2').submit();">
                         <i class="material-icons">input</i><span>{{ __('Logout') }}</span>
                     </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form-2" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
                 </li>
