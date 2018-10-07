@@ -8,7 +8,7 @@
     <link href="{{asset('assets/frontend/css/home/responsive.css')}}" rel="stylesheet">
 
     <style>
-        .favorite_posts{
+        .favorite_posts {
             color: blue;
         }
     </style>
@@ -18,24 +18,26 @@
     <div class="main-slider">
         <div class="swiper-container position-static" data-slide-effect="slide" data-autoheight="false"
              data-swiper-speed="500" data-swiper-autoplay="10000" data-swiper-margin="0" data-swiper-slides-per-view="4"
-             data-swiper-breakpoints="true" data-swiper-loop="true" >
+             data-swiper-breakpoints="true" data-swiper-loop="true">
             <div class="swiper-wrapper">
 
                 @foreach($categories as $key=>$category)
-                <div class="swiper-slide">
-                    <a class="slider-category" href="#">
-                        <div class="blog-image"><img src="{{Storage::disk('public')->url('category/slider/'.$category->image)}}" alt="{{$category->name}}"></div>
+                    <div class="swiper-slide">
+                        <a class="slider-category" href="#">
+                            <div class="blog-image"><img
+                                        src="{{Storage::disk('public')->url('category/slider/'.$category->image)}}"
+                                        alt="{{$category->name}}"></div>
 
-                        <div class="category">
-                            <div class="display-table center-text">
-                                <div class="display-table-cell">
-                                    <h3><b>{{strtoupper($category->name)}}</b></h3>
+                            <div class="category">
+                                <div class="display-table center-text">
+                                    <div class="display-table-cell">
+                                        <h3><b>{{strtoupper($category->name)}}</b></h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </a>
-                </div><!-- swiper-slide -->
+                        </a>
+                    </div><!-- swiper-slide -->
                 @endforeach
 
             </div><!-- swiper-wrapper -->
@@ -53,9 +55,13 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[0]->image)}}" alt="{{$posts[0]->title}}"></div>
+                            <div class="blog-image"><img
+                                        src="{{Storage::disk('public')->url('post/'.$posts[0]->image)}}"
+                                        alt="{{$posts[0]->title}}"></div>
 
-                            <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[0]->user->image) }}" alt="Profile Image"></a>
+                            <a class="avatar" href="#"><img
+                                        src="{{ Storage::disk('public')->url('profile/'.$posts[0]->user->image) }}"
+                                        alt="Profile Image"></a>
                             {{--<a class="avatar" href="#"><img src="{{asset('profile/'.$posts[0]->user->image)}}" alt="Profile Image"></a>--}}
 
                             <div class="blog-info">
@@ -65,14 +71,19 @@
                                 <ul class="post-footer">
                                     <li>
                                         @guest
-                                            <a href="javascript:void(0);" onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i class="ion-heart"></i>{{$posts[0]->favorite_to_users->count()}}</a>
+                                            <a href="javascript:void(0);"
+                                               onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                        class="ion-heart"></i>{{$posts[0]->favorite_to_users->count()}}
+                                            </a>
                                         @else
                                             <a href="javascript:void(0);"
                                                onclick="document.getElementById('favorite-form-{{$posts[0]->id}}').submit();"
                                                class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[0]->id)->count() ==0 ? 'favorite_posts':''}}">
                                                 <i class="ion-heart"></i>{{$posts[0]->favorite_to_users->count()}}
                                             </a>
-                                            <form id="favorite-form-{{$posts[0]->id}}" method="post" action="{{route('post.favorite',$posts[0]->id)}}" style="display: none;">@csrf</form>
+                                            <form id="favorite-form-{{$posts[0]->id}}" method="post"
+                                                  action="{{route('post.favorite',$posts[0]->id)}}"
+                                                  style="display: none;">@csrf</form>
                                         @endguest
                                     </li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
@@ -88,15 +99,33 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[1]->image)}}" alt="{{$posts[1]->title}}"></div>
+                            <div class="blog-image"><img
+                                        src="{{Storage::disk('public')->url('post/'.$posts[1]->image)}}"
+                                        alt="{{$posts[1]->title}}"></div>
 
-                            <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[1]->user->image) }}" alt="Profile Image"></a>
+                            <a class="avatar" href="#"><img
+                                        src="{{ Storage::disk('public')->url('profile/'.$posts[1]->user->image) }}"
+                                        alt="Profile Image"></a>
 
                             <div class="blog-info">
                                 <h4 class="title"><a href="#"><b>{{ucwords($posts[1]->title)}}</b></a></h4>
 
                                 <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                    <li>@guest
+                                            <a href="javascript:void(0);"
+                                               onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                        class="ion-heart"></i>{{$posts[1]->favorite_to_users->count()}}
+                                            </a>
+                                        @else
+                                            <a href="javascript:void(0);"
+                                               onclick="document.getElementById('favorite-form-{{$posts[1]->id}}').submit();"
+                                               class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[1]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                                <i class="ion-heart"></i>{{$posts[1]->favorite_to_users->count()}}
+                                            </a>
+                                            <form id="favorite-form-{{$posts[1]->id}}" method="post"
+                                                  action="{{route('post.favorite',$posts[1]->id)}}"
+                                                  style="display: none;">@csrf</form>
+                                        @endguest</li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$posts[1]->view_count}}</a></li>
                                 </ul>
@@ -111,14 +140,31 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[2]->image)}}" alt="{{$posts[2]->title}}"></div>
+                            <div class="blog-image"><img
+                                        src="{{Storage::disk('public')->url('post/'.$posts[2]->image)}}"
+                                        alt="{{$posts[2]->title}}"></div>
 
-                            <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[2]->user->image) }}" alt="Profile Image"></a>
+                            <a class="avatar" href="#"><img
+                                        src="{{ Storage::disk('public')->url('profile/'.$posts[2]->user->image) }}"
+                                        alt="Profile Image"></a>
 
                             <h4 class="title"><a href="#"><b>{{ucwords($posts[2]->title)}}</b></a></h4>
 
                             <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li>@guest
+                                        <a href="javascript:void(0);"
+                                           onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                    class="ion-heart"></i>{{$posts[2]->favorite_to_users->count()}}</a>
+                                    @else
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('favorite-form-{{$posts[2]->id}}').submit();"
+                                           class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[2]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                            <i class="ion-heart"></i>{{$posts[2]->favorite_to_users->count()}}
+                                        </a>
+                                        <form id="favorite-form-{{$posts[2]->id}}" method="post"
+                                              action="{{route('post.favorite',$posts[2]->id)}}"
+                                              style="display: none;">@csrf</form>
+                                    @endguest</li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[2]->view_count}}</a></li>
                             </ul>
@@ -131,7 +177,9 @@
                     <div class="card h-100">
                         <div class="single-post post-style-2">
 
-                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[3]->image)}}" alt="{{$posts[3]->title}}"></div>
+                            <div class="blog-image"><img
+                                        src="{{Storage::disk('public')->url('post/'.$posts[3]->image)}}"
+                                        alt="{{$posts[3]->title}}"></div>
 
                             <div class="blog-info">
 
@@ -146,15 +194,32 @@
                                 <p>{!!str_limit($posts[3]->body,155,'')!!}</p>
 
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[3]->user->image) }}" alt="Profile Image"></a>
+                                    <a class="avatar" href="#"><img
+                                                src="{{ Storage::disk('public')->url('profile/'.$posts[3]->user->image) }}"
+                                                alt="Profile Image"></a>
                                     <div class="right-area">
                                         <a class="name" href="#"><b>{{$posts[3]->user->name}}</b></a>
-                                        <h6 class="date" href="#">on {{$posts[3]->created_at->format('M d, Y')}} at {{$posts[3]->created_at->format('g:ia')}}</h6>
+                                        <h6 class="date" href="#">on {{$posts[3]->created_at->format('M d, Y')}}
+                                            at {{$posts[3]->created_at->format('g:ia')}}</h6>
                                     </div>
                                 </div>
 
                                 <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                    <li>@guest
+                                            <a href="javascript:void(0);"
+                                               onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                        class="ion-heart"></i>{{$posts[3]->favorite_to_users->count()}}
+                                            </a>
+                                        @else
+                                            <a href="javascript:void(0);"
+                                               onclick="document.getElementById('favorite-form-{{$posts[3]->id}}').submit();"
+                                               class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[3]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                                <i class="ion-heart"></i>{{$posts[3]->favorite_to_users->count()}}
+                                            </a>
+                                            <form id="favorite-form-{{$posts[3]->id}}" method="post"
+                                                  action="{{route('post.favorite',$posts[3]->id)}}"
+                                                  style="display: none;">@csrf</form>
+                                        @endguest</li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$posts[3]->view_count}}</a></li>
                                 </ul>
@@ -170,14 +235,31 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[4]->image)}}" alt="{{$posts[4]->title}}"></div>
+                            <div class="blog-image"><img
+                                        src="{{Storage::disk('public')->url('post/'.$posts[4]->image)}}"
+                                        alt="{{$posts[4]->title}}"></div>
 
-                            <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[4]->user->image) }}" alt="Profile Image"></a>
+                            <a class="avatar" href="#"><img
+                                        src="{{ Storage::disk('public')->url('profile/'.$posts[4]->user->image) }}"
+                                        alt="Profile Image"></a>
 
                             <h4 class="title"><a href="#"><b>{{ucwords($posts[4]->title)}}</b></a></h4>
 
                             <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li>@guest
+                                        <a href="javascript:void(0);"
+                                           onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                    class="ion-heart"></i>{{$posts[4]->favorite_to_users->count()}}</a>
+                                    @else
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('favorite-form-{{$posts[4]->id}}').submit();"
+                                           class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[4]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                            <i class="ion-heart"></i>{{$posts[4]->favorite_to_users->count()}}
+                                        </a>
+                                        <form id="favorite-form-{{$posts[4]->id}}" method="post"
+                                              action="{{route('post.favorite',$posts[4]->id)}}"
+                                              style="display: none;">@csrf</form>
+                                    @endguest</li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[4]->view_count}}</a></li>
                             </ul>
@@ -203,15 +285,32 @@
                                 <p>{!! str_limit($posts[5]->body,155,'') !!}</p>
 
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[5]->user->image) }}" alt="Profile Image"></a>
+                                    <a class="avatar" href="#"><img
+                                                src="{{ Storage::disk('public')->url('profile/'.$posts[5]->user->image) }}"
+                                                alt="Profile Image"></a>
                                     <div class="right-area">
                                         <a class="name" href="#"><b>{{$posts[5]->user->name}}</b></a>
-                                        <h6 class="date" href="#">on {{$posts[5]->created_at->format('M d, Y')}} at {{$posts[5]->created_at->format('g:ia')}}</h6>
+                                        <h6 class="date" href="#">on {{$posts[5]->created_at->format('M d, Y')}}
+                                            at {{$posts[5]->created_at->format('g:ia')}}</h6>
                                     </div>
                                 </div>
 
                                 <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                    <li>@guest
+                                            <a href="javascript:void(0);"
+                                               onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                        class="ion-heart"></i>{{$posts[5]->favorite_to_users->count()}}
+                                            </a>
+                                        @else
+                                            <a href="javascript:void(0);"
+                                               onclick="document.getElementById('favorite-form-{{$posts[5]->id}}').submit();"
+                                               class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[5]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                                <i class="ion-heart"></i>{{$posts[5]->favorite_to_users->count()}}
+                                            </a>
+                                            <form id="favorite-form-{{$posts[5]->id}}" method="post"
+                                                  action="{{route('post.favorite',$posts[5]->id)}}"
+                                                  style="display: none;">@csrf</form>
+                                        @endguest</li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$posts[5]->view_count}}</a></li>
                                 </ul>
@@ -227,15 +326,33 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[6]->image)}}" alt="{{$posts[6]->title}}"></div>
+                            <div class="blog-image"><img
+                                        src="{{Storage::disk('public')->url('post/'.$posts[6]->image)}}"
+                                        alt="{{$posts[6]->title}}"></div>
 
-                            <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[6]->user->image) }}" alt="Profile Image"></a>
+                            <a class="avatar" href="#"><img
+                                        src="{{ Storage::disk('public')->url('profile/'.$posts[6]->user->image) }}"
+                                        alt="Profile Image"></a>
 
                             <div class="blog-info">
                                 <h4 class="title"><a href="#"><b>{{ucwords($posts[6]->title)}}</b></a></h4>
 
                                 <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                    <li>@guest
+                                            <a href="javascript:void(0);"
+                                               onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                        class="ion-heart"></i>{{$posts[6]->favorite_to_users->count()}}
+                                            </a>
+                                        @else
+                                            <a href="javascript:void(0);"
+                                               onclick="document.getElementById('favorite-form-{{$posts[6]->id}}').submit();"
+                                               class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[6]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                                <i class="ion-heart"></i>{{$posts[6]->favorite_to_users->count()}}
+                                            </a>
+                                            <form id="favorite-form-{{$posts[6]->id}}" method="post"
+                                                  action="{{route('post.favorite',$posts[6]->id)}}"
+                                                  style="display: none;">@csrf</form>
+                                        @endguest</li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$posts[6]->view_count}}</a></li>
                                 </ul>
@@ -252,11 +369,25 @@
                         <div class="single-post post-style-4">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[7]->title)}}</b></a></h4>
+                                <h4 class="title display-table-cell"><a
+                                            href="#"><b>{{ucwords($posts[7]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li>@guest
+                                        <a href="javascript:void(0);"
+                                           onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                    class="ion-heart"></i>{{$posts[7]->favorite_to_users->count()}}</a>
+                                    @else
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('favorite-form-{{$posts[7]->id}}').submit();"
+                                           class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[7]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                            <i class="ion-heart"></i>{{$posts[7]->favorite_to_users->count()}}
+                                        </a>
+                                        <form id="favorite-form-{{$posts[7]->id}}" method="post"
+                                              action="{{route('post.favorite',$posts[7]->id)}}"
+                                              style="display: none;">@csrf</form>
+                                    @endguest</li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[7]->view_count}}</a></li>
                             </ul>
@@ -266,11 +397,25 @@
                         <div class="single-post">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[8]->title)}}</b></a></h4>
+                                <h4 class="title display-table-cell"><a
+                                            href="#"><b>{{ucwords($posts[8]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li>@guest
+                                        <a href="javascript:void(0);"
+                                           onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                    class="ion-heart"></i>{{$posts[8]->favorite_to_users->count()}}</a>
+                                    @else
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('favorite-form-{{$posts[8]->id}}').submit();"
+                                           class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[8]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                            <i class="ion-heart"></i>{{$posts[8]->favorite_to_users->count()}}
+                                        </a>
+                                        <form id="favorite-form-{{$posts[8]->id}}" method="post"
+                                              action="{{route('post.favorite',$posts[8]->id)}}"
+                                              style="display: none;">@csrf</form>
+                                    @endguest</li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[8]->view_count}}</a></li>
                             </ul>
@@ -286,11 +431,25 @@
                         <div class="single-post post-style-4">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[9]->title)}}</b></a></h4>
+                                <h4 class="title display-table-cell"><a
+                                            href="#"><b>{{ucwords($posts[9]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li>@guest
+                                        <a href="javascript:void(0);"
+                                           onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                    class="ion-heart"></i>{{$posts[9]->favorite_to_users->count()}}</a>
+                                    @else
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('favorite-form-{{$posts[9]->id}}').submit();"
+                                           class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[9]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                            <i class="ion-heart"></i>{{$posts[9]->favorite_to_users->count()}}
+                                        </a>
+                                        <form id="favorite-form-{{$posts[9]->id}}" method="post"
+                                              action="{{route('post.favorite',$posts[9]->id)}}"
+                                              style="display: none;">@csrf</form>
+                                    @endguest</li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[9]->view_count}}</a></li>
                             </ul>
@@ -300,11 +459,25 @@
                         <div class="single-post">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[10]->title)}}</b></a></h4>
+                                <h4 class="title display-table-cell"><a
+                                            href="#"><b>{{ucwords($posts[10]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li>@guest
+                                        <a href="javascript:void(0);"
+                                           onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                    class="ion-heart"></i>{{$posts[10]->favorite_to_users->count()}}</a>
+                                    @else
+                                        <a href="javascript:void(0);"
+                                           onclick="document.getElementById('favorite-form-{{$posts[10]->id}}').submit();"
+                                           class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[10]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                            <i class="ion-heart"></i>{{$posts[10]->favorite_to_users->count()}}
+                                        </a>
+                                        <form id="favorite-form-{{$posts[10]->id}}" method="post"
+                                              action="{{route('post.favorite',$posts[10]->id)}}"
+                                              style="display: none;">@csrf</form>
+                                    @endguest</li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[10]->view_count}}</a></li>
                             </ul>
@@ -318,12 +491,14 @@
                     <div class="card h-100">
                         <div class="single-post post-style-2">
 
-                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[11]->image)}}" alt="{{$posts[9]->title}}"></div>
+                            <div class="blog-image"><img
+                                        src="{{Storage::disk('public')->url('post/'.$posts[11]->image)}}"
+                                        alt="{{$posts[11]->title}}"></div>
 
                             <div class="blog-info">
 
                                 <h6 class="pre-title">
-                                    @foreach($posts[5]->categories as $category)
+                                    @foreach($posts[11]->categories as $category)
                                         <a href="#"><b>{{strtoupper($category->name)}}</b></a>
                                     @endforeach
                                 </h6>
@@ -334,15 +509,32 @@
                                 <p>{!! str_limit($posts[12]->body,155,'') !!}</p>
 
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[12]->user->image) }}" alt="Profile Image"></a>
+                                    <a class="avatar" href="#"><img
+                                                src="{{ Storage::disk('public')->url('profile/'.$posts[12]->user->image) }}"
+                                                alt="Profile Image"></a>
                                     <div class="right-area">
                                         <a class="name" href="#"><b>{{$posts[12]->user->name}}</b></a>
-                                        <h6 class="date" href="#">on {{$posts[12]->created_at->format('M d, Y')}} at {{$posts[12]->created_at->format('g:ia')}}</h6>
+                                        <h6 class="date" href="#">on {{$posts[12]->created_at->format('M d, Y')}}
+                                            at {{$posts[12]->created_at->format('g:ia')}}</h6>
                                     </div>
                                 </div>
 
                                 <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                    <li>@guest
+                                            <a href="javascript:void(0);"
+                                               onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
+                                                        class="ion-heart"></i>{{$posts[12]->favorite_to_users->count()}}
+                                            </a>
+                                        @else
+                                            <a href="javascript:void(0);"
+                                               onclick="document.getElementById('favorite-form-{{$posts[12]->id}}').submit();"
+                                               class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[12]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                                <i class="ion-heart"></i>{{$posts[12]->favorite_to_users->count()}}
+                                            </a>
+                                            <form id="favorite-form-{{$posts[12]->id}}" method="post"
+                                                  action="{{route('post.favorite',$posts[12]->id)}}"
+                                                  style="display: none;">@csrf</form>
+                                        @endguest</li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$posts[12]->view_count}}</a></li>
                                 </ul>
