@@ -30,6 +30,8 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     // Subscriber
     Route::get('/subscriber','SubscriberController@index')->name('subscriber.index');
     Route::delete('/subscriber/{id}','SubscriberController@destroy')->name('subscriber.destroy');
+    // Favorite
+    Route::get('/favorite','FavoriteController@index')->name('favorite.index');
 });
 // Author route group
 Route::group(['as'=>'author.','prefix'=>'author','namespace'=>'Author','middleware'=>['auth','author']], function(){
@@ -41,5 +43,7 @@ Route::group(['as'=>'author.','prefix'=>'author','namespace'=>'Author','middlewa
     Route::get('settings','SettingsController@index')->name('settings');
     Route::put('profile-update','SettingsController@updateProfile')->name('profile.update');
     Route::put('password-update','SettingsController@updatePassword')->name('password.update');
+    // Favorite
+    Route::get('/favorite','FavoriteController@index')->name('favorite.index');
 });
 
