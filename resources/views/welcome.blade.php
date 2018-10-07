@@ -49,7 +49,8 @@
 
                             <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[0]->image)}}" alt="{{$posts[0]->title}}"></div>
 
-                            <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
+                            <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[0]->user->image) }}" alt="Profile Image"></a>
+                            {{--<a class="avatar" href="#"><img src="{{asset('profile/'.$posts[0]->user->image)}}" alt="Profile Image"></a>--}}
 
                             <div class="blog-info">
 
@@ -72,7 +73,7 @@
 
                             <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[1]->image)}}" alt="{{$posts[1]->title}}"></div>
 
-                            <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
+                            <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[1]->user->image) }}" alt="Profile Image"></a>
 
                             <div class="blog-info">
                                 <h4 class="title"><a href="#"><b>{{ucwords($posts[1]->title)}}</b></a></h4>
@@ -95,7 +96,7 @@
 
                             <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[2]->image)}}" alt="{{$posts[2]->title}}"></div>
 
-                            <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/averie-woodard-319832.jpg')}}" alt="Profile Image"></a>
+                            <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[2]->user->image) }}" alt="Profile Image"></a>
 
                             <h4 class="title"><a href="#"><b>{{ucwords($posts[2]->title)}}</b></a></h4>
 
@@ -128,7 +129,7 @@
                                 <p>{!!str_limit($posts[3]->body,155,'')!!}</p>
 
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
+                                    <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[3]->user->image) }}" alt="Profile Image"></a>
                                     <div class="right-area">
                                         <a class="name" href="#"><b>{{$posts[3]->user->name}}</b></a>
                                         <h6 class="date" href="#">on {{$posts[3]->created_at->format('M d, Y')}} at {{$posts[3]->created_at->format('g:ia')}}</h6>
@@ -154,7 +155,7 @@
 
                             <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[4]->image)}}" alt="{{$posts[4]->title}}"></div>
 
-                            <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/averie-woodard-319832.jpg')}}" alt="Profile Image"></a>
+                            <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[4]->user->image) }}" alt="Profile Image"></a>
 
                             <h4 class="title"><a href="#"><b>{{ucwords($posts[4]->title)}}</b></a></h4>
 
@@ -185,10 +186,10 @@
                                 <p>{!! str_limit($posts[5]->body,155,'') !!}</p>
 
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
+                                    <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[5]->user->image) }}" alt="Profile Image"></a>
                                     <div class="right-area">
                                         <a class="name" href="#"><b>{{$posts[5]->user->name}}</b></a>
-                                        <h6 class="date" href="#">on {{$posts[5]->created_at->format('M d, Y')}} at {{$posts[3]->created_at->format('g:ia')}}</h6>
+                                        <h6 class="date" href="#">on {{$posts[5]->created_at->format('M d, Y')}} at {{$posts[5]->created_at->format('g:ia')}}</h6>
                                     </div>
                                 </div>
 
@@ -209,12 +210,12 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[4]->image)}}" alt="{{$posts[4]->title}}"></div>
+                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[6]->image)}}" alt="{{$posts[6]->title}}"></div>
 
-                            <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
+                            <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[6]->user->image) }}" alt="Profile Image"></a>
 
                             <div class="blog-info">
-                                <h4 class="title"><a href="#"><b>{{ucwords($posts[4]->title)}}</b></a></h4>
+                                <h4 class="title"><a href="#"><b>{{ucwords($posts[6]->title)}}</b></a></h4>
 
                                 <ul class="post-footer">
                                     <li><a href="#"><i class="ion-heart"></i>57</a></li>
@@ -222,40 +223,6 @@
                                     <li><a href="#"><i class="ion-eye"></i>138</a></li>
                                 </ul>
                             </div><!-- blog-info -->
-
-                        </div><!-- single-post -->
-
-                    </div><!-- card -->
-                </div><!-- col-lg-4 col-md-6 -->
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-
-                        <div class="single-post post-style-4">
-
-                            <div class="display-table">
-                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[5]->title)}}</b></a></h4>
-                            </div>
-
-                            <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
-                            </ul>
-
-                        </div><!-- single-post -->
-
-                        <div class="single-post">
-
-                            <div class="display-table">
-                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[6]->title)}}</b></a></h4>
-                            </div>
-
-                            <ul class="post-footer">
-                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
-                            </ul>
 
                         </div><!-- single-post -->
 
@@ -296,11 +263,45 @@
                     </div><!-- card -->
                 </div><!-- col-lg-4 col-md-6 -->
 
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100">
+
+                        <div class="single-post post-style-4">
+
+                            <div class="display-table">
+                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[9]->title)}}</b></a></h4>
+                            </div>
+
+                            <ul class="post-footer">
+                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                            </ul>
+
+                        </div><!-- single-post -->
+
+                        <div class="single-post">
+
+                            <div class="display-table">
+                                <h4 class="title display-table-cell"><a href="#"><b>{{ucwords($posts[10]->title)}}</b></a></h4>
+                            </div>
+
+                            <ul class="post-footer">
+                                <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                            </ul>
+
+                        </div><!-- single-post -->
+
+                    </div><!-- card -->
+                </div><!-- col-lg-4 col-md-6 -->
+
                 <div class="col-lg-8 col-md-12">
                     <div class="card h-100">
                         <div class="single-post post-style-2">
 
-                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[9]->image)}}" alt="{{$posts[9]->title}}"></div>
+                            <div class="blog-image"><img src="{{Storage::disk('public')->url('post/'.$posts[11]->image)}}" alt="{{$posts[9]->title}}"></div>
 
                             <div class="blog-info">
 
@@ -311,15 +312,15 @@
                                 </h6>
 
 
-                                <h4 class="title"><a href="#"><b>{{ucwords($posts[9]->title)}}</b></a></h4>
+                                <h4 class="title"><a href="#"><b>{{ucwords($posts[12]->title)}}</b></a></h4>
 
-                                <p>{!! str_limit($posts[9]->body,155,'') !!}</p>
+                                <p>{!! str_limit($posts[12]->body,155,'') !!}</p>
 
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#"><img src="{{asset('assets/frontend/images/icons8-team-355979.jpg')}}" alt="Profile Image"></a>
+                                    <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$posts[12]->user->image) }}" alt="Profile Image"></a>
                                     <div class="right-area">
-                                        <a class="name" href="#"><b>{{$posts[9]->user->name}}</b></a>
-                                        <h6 class="date" href="#">on {{$posts[5]->created_at->format('M d, Y')}} at {{$posts[3]->created_at->format('g:ia')}}</h6>
+                                        <a class="name" href="#"><b>{{$posts[12]->user->name}}</b></a>
+                                        <h6 class="date" href="#">on {{$posts[12]->created_at->format('M d, Y')}} at {{$posts[12]->created_at->format('g:ia')}}</h6>
                                     </div>
                                 </div>
 
