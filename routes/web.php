@@ -4,7 +4,11 @@ Route::get('/', 'HomeController@index')->name('home');
 //Route::get('/post/{$id}/show', 'HomeController@show')->name('home');
 //Subscriber
 Route::post('subscriber','SubscriberController@store')->name('subscriber.store');
-
+// Favorite
+Route::group(['middleware'=>['auth']],function(){
+    Route::post('favorite/{post}/add','FavoriteController@add')->name('post.favorite');
+});
+// Auth
 Auth::routes();
 
 // Admin route group

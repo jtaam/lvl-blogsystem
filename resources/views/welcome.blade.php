@@ -6,6 +6,12 @@
     <link href="{{asset('assets/frontend/css/home/styles.css')}}" rel="stylesheet">
 
     <link href="{{asset('assets/frontend/css/home/responsive.css')}}" rel="stylesheet">
+
+    <style>
+        .favorite_posts{
+            color: blue;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -57,9 +63,20 @@
                                 <h4 class="title"><a href="#"><b>{{ucwords($posts[0]->title)}}</b></a></h4>
 
                                 <ul class="post-footer">
-                                    <li><a href="#"><i class="ion-heart"></i>57</a></li>
+                                    <li>
+                                        @guest
+                                            <a href="javascript:void(0);" onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i class="ion-heart"></i>{{$posts[0]->favorite_to_users->count()}}</a>
+                                        @else
+                                            <a href="javascript:void(0);"
+                                               onclick="document.getElementById('favorite-form-{{$posts[0]->id}}').submit();"
+                                               class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[0]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                                <i class="ion-heart"></i>{{$posts[0]->favorite_to_users->count()}}
+                                            </a>
+                                            <form id="favorite-form-{{$posts[0]->id}}" method="post" action="{{route('post.favorite',$posts[0]->id)}}" style="display: none;">@csrf</form>
+                                        @endguest
+                                    </li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{$posts[0]->view_count}}</a></li>
                                 </ul>
 
                             </div><!-- blog-info -->
@@ -81,7 +98,7 @@
                                 <ul class="post-footer">
                                     <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{$posts[1]->view_count}}</a></li>
                                 </ul>
                             </div><!-- blog-info -->
 
@@ -103,7 +120,7 @@
                             <ul class="post-footer">
                                 <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{$posts[2]->view_count}}</a></li>
                             </ul>
 
                         </div><!-- single-post -->
@@ -139,7 +156,7 @@
                                 <ul class="post-footer">
                                     <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{$posts[3]->view_count}}</a></li>
                                 </ul>
 
                             </div><!-- blog-right -->
@@ -162,7 +179,7 @@
                             <ul class="post-footer">
                                 <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{$posts[4]->view_count}}</a></li>
                             </ul>
 
                         </div><!-- single-post -->
@@ -196,7 +213,7 @@
                                 <ul class="post-footer">
                                     <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{$posts[5]->view_count}}</a></li>
                                 </ul>
 
                             </div><!-- blog-right -->
@@ -220,7 +237,7 @@
                                 <ul class="post-footer">
                                     <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{$posts[6]->view_count}}</a></li>
                                 </ul>
                             </div><!-- blog-info -->
 
@@ -241,7 +258,7 @@
                             <ul class="post-footer">
                                 <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{$posts[7]->view_count}}</a></li>
                             </ul>
 
                         </div><!-- single-post -->
@@ -255,7 +272,7 @@
                             <ul class="post-footer">
                                 <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{$posts[8]->view_count}}</a></li>
                             </ul>
 
                         </div><!-- single-post -->
@@ -275,7 +292,7 @@
                             <ul class="post-footer">
                                 <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{$posts[9]->view_count}}</a></li>
                             </ul>
 
                         </div><!-- single-post -->
@@ -289,7 +306,7 @@
                             <ul class="post-footer">
                                 <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{$posts[10]->view_count}}</a></li>
                             </ul>
 
                         </div><!-- single-post -->
@@ -327,7 +344,7 @@
                                 <ul class="post-footer">
                                     <li><a href="#"><i class="ion-heart"></i>57</a></li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>138</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{$posts[12]->view_count}}</a></li>
                                 </ul>
 
                             </div><!-- blog-right -->
