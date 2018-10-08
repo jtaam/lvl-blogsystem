@@ -192,28 +192,23 @@
 
                 <div class="col-lg-8 col-md-12">
                     <div class="comment-form">
-                        <form method="post">
-                            <div class="row">
+                        @guest
+                            <p>Please, <a href="{{route('login')}}" class="btn btn-info">Login</a> to comment.</p>
+                        @else
+                            <form method="post" action="{{route('comment.store',$post->id)}}">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <textarea name="comment" rows="2" class="text-area-messge form-control"
+                                                  placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
+                                    </div><!-- col-sm-12 -->
+                                    <div class="col-sm-12">
+                                        <button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
+                                    </div><!-- col-sm-12 -->
 
-                                <div class="col-sm-6">
-                                    <input type="text" aria-required="true" name="contact-form-name" class="form-control"
-                                           placeholder="Enter your name" aria-invalid="true" required >
-                                </div><!-- col-sm-6 -->
-                                <div class="col-sm-6">
-                                    <input type="email" aria-required="true" name="contact-form-email" class="form-control"
-                                           placeholder="Enter your email" aria-invalid="true" required>
-                                </div><!-- col-sm-6 -->
-
-                                <div class="col-sm-12">
-									<textarea name="contact-form-message" rows="2" class="text-area-messge form-control"
-                                              placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
-                                </div><!-- col-sm-12 -->
-                                <div class="col-sm-12">
-                                    <button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
-                                </div><!-- col-sm-12 -->
-
-                            </div><!-- row -->
-                        </form>
+                                </div><!-- row -->
+                            </form>
+                        @endguest
                     </div><!-- comment-form -->
 
                     <h4><b>COMMENTS(12)</b></h4>
