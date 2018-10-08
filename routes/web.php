@@ -2,6 +2,7 @@
 // Homepage
 Route::get('/', 'HomeController@index')->name('home');
 // Post
+Route::get('posts','PostController@index')->name('posts.index');
 Route::get('post/{slug}','PostController@details')->name('post.details');
 //Subscriber
 Route::post('subscriber', 'SubscriberController@store')->name('subscriber.store');
