@@ -66,7 +66,7 @@
 
                             <div class="blog-info">
 
-                                <h4 class="title"><a href="#"><b>{{ucwords($posts[0]->title)}}</b></a></h4>
+                                <h4 class="title"><a href="{{route('post.details', $posts[0]->slug)}}"><b>{{ucwords($posts[0]->title)}}</b></a></h4>
 
                                 <ul class="post-footer">
                                     <li>
