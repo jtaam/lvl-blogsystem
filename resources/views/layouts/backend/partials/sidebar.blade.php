@@ -98,6 +98,13 @@
                         <span>Favorite Posts</span>
                     </a>
                 </li>
+                {{--COMMENTS--}}
+                <li class="{{Request::is('admin/comment*')?'active':''}}">
+                    <a href="{{route('admin.comment.index')}}" class="">
+                        <i class="material-icons">comment</i>
+                        <span>Comments</span>
+                    </a>
+                </li>
                 {{--SUBSCRIBER--}}
                 <li class="{{Request::is('admin/subscriber')?'active':''}}">
                     <a href="{{route('admin.subscriber.index')}}" class="">
