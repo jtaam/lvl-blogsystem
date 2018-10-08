@@ -74,6 +74,7 @@ class PostController extends Controller
         $post->user_id=Auth::id();
         $post->title=$request->title;
         $post->slug=$slug;
+        $post->post_promo=$request->post_promo;
         $post->image=$imageName;
         $post->body=$request->body;
         if (isset($request->status)){
@@ -170,6 +171,7 @@ class PostController extends Controller
         $post->user_id=Auth::id();
         $post->title=$request->title;
         $post->slug=$slug;
+        $post->post_promo=$request->post_promo;
         $post->image=$imageName;
         $post->body=$request->body;
         if (isset($request->status)){
@@ -177,7 +179,11 @@ class PostController extends Controller
         }else{
             $post->status=false;
         }
-        $post->is_approved=false;
+        if ($post->is_approved == true){
+            $post->is_approved=true;
+        }else{
+            $post->is_approved=false;
+        }
         $post->save();
 
         $post->categories()->sync($request->categories);

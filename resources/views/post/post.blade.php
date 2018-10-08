@@ -55,7 +55,7 @@
                             <h3 class="title"><b>{{ucwords($post->title)}}</b></h3>
 
                             <p class="para">
-
+                                {!! $post->post_promo !!}
                             </p>
                             <br>
                             <div class="post-image"><img src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="{{$post->title}}" /></div>

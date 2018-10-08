@@ -106,6 +106,29 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
+                            <h2>POST PROMO</h2>
+                        </div>
+                        <div class="body">
+                            <i class="card-inside-title">Optional:- This text/paragraph will be shown above the post's image.</i>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <textarea name="post_promo" rows="4" class="form-control no-resize" placeholder="Type posts promo...">{{$post->post_promo}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
                             <h2>
                                 POST BODY
                             </h2>

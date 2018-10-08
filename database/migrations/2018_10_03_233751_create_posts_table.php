@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->text('post_promo')->nullable();
             $table->string('image')->default('default.png');
             $table->text('body');
             $table->integer('view_count')->default(0);
