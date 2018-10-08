@@ -108,7 +108,7 @@
                                         alt="Profile Image"></a>
 
                             <div class="blog-info">
-                                <h4 class="title"><a href="#"><b>{{ucwords($posts[1]->title)}}</b></a></h4>
+                                <h4 class="title"><a href="{{route('post.details', $posts[1]->slug)}}"><b>{{ucwords($posts[1]->title)}}</b></a></h4>
 
                                 <ul class="post-footer">
                                     <li>@guest
@@ -148,7 +148,7 @@
                                         src="{{ Storage::disk('public')->url('profile/'.$posts[2]->user->image) }}"
                                         alt="Profile Image"></a>
 
-                            <h4 class="title"><a href="#"><b>{{ucwords($posts[2]->title)}}</b></a></h4>
+                            <h4 class="title"><a href="{{route('post.details', $posts[2]->slug)}}"><b>{{ucwords($posts[2]->title)}}</b></a></h4>
 
                             <ul class="post-footer">
                                 <li>@guest
@@ -189,7 +189,7 @@
                                     @endforeach
                                 </h6>
 
-                                <h4 class="title"><a href="#"><b>{{ucwords($posts[3]->title)}}</b></a></h4>
+                                <h4 class="title"><a href="{{route('post.details', $posts[3]->slug)}}"><b>{{ucwords($posts[3]->title)}}</b></a></h4>
 
                                 <p>{!!str_limit($posts[3]->body,155,'')!!}</p>
 
@@ -243,7 +243,7 @@
                                         src="{{ Storage::disk('public')->url('profile/'.$posts[4]->user->image) }}"
                                         alt="Profile Image"></a>
 
-                            <h4 class="title"><a href="#"><b>{{ucwords($posts[4]->title)}}</b></a></h4>
+                            <h4 class="title"><a href="{{route('post.details', $posts[4]->slug)}}"><b>{{ucwords($posts[4]->title)}}</b></a></h4>
 
                             <ul class="post-footer">
                                 <li>@guest
@@ -280,7 +280,7 @@
                                         <a href="#"><b>{{strtoupper($category->name)}}</b></a>
                                     @endforeach
                                 </h6>
-                                <h4 class="title"><a href="#"><b>{{$posts[5]->title}}</b></a></h4>
+                                <h4 class="title"><a href="{{route('post.details', $posts[5]->slug)}}"><b>{{$posts[5]->title}}</b></a></h4>
 
                                 <p>{!! str_limit($posts[5]->body,155,'') !!}</p>
 
@@ -335,7 +335,7 @@
                                         alt="Profile Image"></a>
 
                             <div class="blog-info">
-                                <h4 class="title"><a href="#"><b>{{ucwords($posts[6]->title)}}</b></a></h4>
+                                <h4 class="title"><a href="{{route('post.details', $posts[6]->slug)}}"><b>{{ucwords($posts[6]->title)}}</b></a></h4>
 
                                 <ul class="post-footer">
                                     <li>@guest
@@ -369,8 +369,7 @@
                         <div class="single-post post-style-4">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a
-                                            href="#"><b>{{ucwords($posts[7]->title)}}</b></a></h4>
+                                <h4 class="title display-table-cell"><a href="{{route('post.details', $posts[7]->slug)}}"><b>{{ucwords($posts[7]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
@@ -397,8 +396,7 @@
                         <div class="single-post">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a
-                                            href="#"><b>{{ucwords($posts[8]->title)}}</b></a></h4>
+                                <h4 class="title display-table-cell"><a href="{{route('post.details', $posts[8]->slug)}}"><b>{{ucwords($posts[8]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
@@ -431,8 +429,7 @@
                         <div class="single-post post-style-4">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a
-                                            href="#"><b>{{ucwords($posts[9]->title)}}</b></a></h4>
+                                <h4 class="title display-table-cell"><a href="{{route('post.details', $posts[9]->slug)}}"><b>{{ucwords($posts[9]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
@@ -459,8 +456,7 @@
                         <div class="single-post">
 
                             <div class="display-table">
-                                <h4 class="title display-table-cell"><a
-                                            href="#"><b>{{ucwords($posts[10]->title)}}</b></a></h4>
+                                <h4 class="title display-table-cell"><a href="{{route('post.details', $posts[10]->slug)}}"><b>{{ucwords($posts[10]->title)}}</b></a></h4>
                             </div>
 
                             <ul class="post-footer">
@@ -499,23 +495,23 @@
 
                                 <h6 class="pre-title">
                                     @foreach($posts[11]->categories as $category)
-                                        <a href="#"><b>{{strtoupper($category->name)}}</b></a>
+                                        <a href="{{route('post.details', $posts[11]->slug)}}"><b>{{strtoupper($category->name)}}</b></a>
                                     @endforeach
                                 </h6>
 
 
-                                <h4 class="title"><a href="#"><b>{{ucwords($posts[12]->title)}}</b></a></h4>
+                                <h4 class="title"><a href="{{route('post.details', $posts[11]->slug)}}"><b>{{ucwords($posts[11]->title)}}</b></a></h4>
 
-                                <p>{!! str_limit($posts[12]->body,155,'') !!}</p>
+                                <p>{!! str_limit($posts[11]->body,155,'') !!}</p>
 
                                 <div class="avatar-area">
                                     <a class="avatar" href="#"><img
-                                                src="{{ Storage::disk('public')->url('profile/'.$posts[12]->user->image) }}"
+                                                src="{{ Storage::disk('public')->url('profile/'.$posts[11]->user->image) }}"
                                                 alt="Profile Image"></a>
                                     <div class="right-area">
-                                        <a class="name" href="#"><b>{{$posts[12]->user->name}}</b></a>
-                                        <h6 class="date" href="#">on {{$posts[12]->created_at->format('M d, Y')}}
-                                            at {{$posts[12]->created_at->format('g:ia')}}</h6>
+                                        <a class="name" href="#"><b>{{$posts[11]->user->name}}</b></a>
+                                        <h6 class="date" href="#">on {{$posts[11]->created_at->format('M d, Y')}}
+                                            at {{$posts[11]->created_at->format('g:ia')}}</h6>
                                     </div>
                                 </div>
 
@@ -523,20 +519,20 @@
                                     <li>@guest
                                             <a href="javascript:void(0);"
                                                onclick="toastr.info('To add favorite list , you need to login first.','Info',{closeButton:true,progressBar:true})"><i
-                                                        class="ion-heart"></i>{{$posts[12]->favorite_to_users->count()}}
+                                                        class="ion-heart"></i>{{$posts[11]->favorite_to_users->count()}}
                                             </a>
                                         @else
                                             <a href="javascript:void(0);"
-                                               onclick="document.getElementById('favorite-form-{{$posts[12]->id}}').submit();"
-                                               class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[12]->id)->count() ==0 ? 'favorite_posts':''}}">
-                                                <i class="ion-heart"></i>{{$posts[12]->favorite_to_users->count()}}
+                                               onclick="document.getElementById('favorite-form-{{$posts[11]->id}}').submit();"
+                                               class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$posts[11]->id)->count() ==0 ? 'favorite_posts':''}}">
+                                                <i class="ion-heart"></i>{{$posts[11]->favorite_to_users->count()}}
                                             </a>
-                                            <form id="favorite-form-{{$posts[12]->id}}" method="post"
-                                                  action="{{route('post.favorite',$posts[12]->id)}}"
+                                            <form id="favorite-form-{{$posts[11]->id}}" method="post"
+                                                  action="{{route('post.favorite',$posts[11]->id)}}"
                                                   style="display: none;">@csrf</form>
                                         @endguest</li>
                                     <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                    <li><a href="#"><i class="ion-eye"></i>{{$posts[12]->view_count}}</a></li>
+                                    <li><a href="#"><i class="ion-eye"></i>{{$posts[11]->view_count}}</a></li>
                                 </ul>
 
                             </div><!-- blog-right -->

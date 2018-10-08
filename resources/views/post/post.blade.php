@@ -65,12 +65,14 @@
                                 {{--ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat--}}
                                 {{--nulla pariatur. Excepteur sint--}}
                                 {{--occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>--}}
-
-                            <ul class="tags">
-                                @foreach($post->tags as $tag)
-                                    <li><a href="#">{{$tag->name}}</a></li>
-                                @endforeach
-                            </ul>
+                            <div class="tag-area">
+                                <h4 class="title"><b>TAGS</b></h4>
+                                <ul class="tags">
+                                    @foreach($post->tags as $tag)
+                                        <li><a href="#">{{$tag->name}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div><!-- blog-post-inner -->
 
                         <div class="post-icons-area">
