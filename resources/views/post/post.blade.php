@@ -54,17 +54,16 @@
                             {{--<h3 class="title"><a href="#"><b>{{ucwords($post->title)}}</b></a></h3>--}}
                             <h3 class="title"><b>{{ucwords($post->title)}}</b></h3>
 
-                            <div class="post-image"><img src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="{{$post->title}}"></div>
+                            <p class="para">
 
-                            <div class="para">{!! $post->body !!}</div>
+                            </p>
+                            <br>
+                            <div class="post-image"><img src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="{{$post->title}}" /></div>
 
-                            {{--<div class="post-image"><img src="images/blog-1-1000x600.jpg" alt="Blog Image"></div>--}}
+                            <div class="para">
+                                {!! $post->body !!}
+                            </div>
 
-                            {{--<p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et--}}
-                                {{--dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex--}}
-                                {{--ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat--}}
-                                {{--nulla pariatur. Excepteur sint--}}
-                                {{--occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>--}}
                             <div class="tag-area">
                                 <h4 class="title"><b>TAGS</b></h4>
                                 <ul class="tags">
