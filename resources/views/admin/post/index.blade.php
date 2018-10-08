@@ -37,7 +37,7 @@
                                         <th>Title</th>
                                         <th>Author</th>
                                         <th>Approved</th>
-                                        <th><i class="material-icons">visibility</i></th>
+                                        <th class="text-center"><i class="material-icons">visibility</i></th>
                                         <th>Status</th>
                                         <th>Created At</th>
                                         {{--<th>Updated At</th>--}}
@@ -50,7 +50,7 @@
                                         <th>Title</th>
                                         <th>Author</th>
                                         <th>Approved</th>
-                                        <th><i class="material-icons">visibility</i></th>
+                                        <th class="text-center"><i class="material-icons">visibility</i></th>
                                         <th>Status</th>
                                         <th>Created At</th>
                                         {{--<th>Updated At</th>--}}
