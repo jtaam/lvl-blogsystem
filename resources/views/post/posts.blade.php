@@ -60,7 +60,7 @@
                                                       action="{{route('post.favorite',$post->id)}}"
                                                       style="display: none;">@csrf</form>
                                             @endguest</li>
-                                        <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                        <li><a href="{{route('post.details',$post->slug)}}#comments"><i class="ion-chatbubble"></i>{{$post->comments()->count()}}</a></li>
                                         <li><a href="#"><i class="ion-eye"></i>{{$post->view_count}}</a></li>
                                     </ul>
 

@@ -91,7 +91,7 @@
                                               action="{{route('post.favorite',$post->id)}}"
                                               style="display: none;">@csrf</form>
                                     @endguest</li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="#comments"><i class="ion-chatbubble"></i>{{$post->comments()->count()}}</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$post->view_count}}</a></li>
                             </ul>
 
@@ -170,7 +170,7 @@
                                                   style="display: none;">@csrf</form>
                                         @endguest
                                     </li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                    <li><a href="{{route('post.details',$randomPost->slug)}}#comments"><i class="ion-chatbubble"></i>{{$randomPost->comments()->count()}}</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$randomPost->view_count}}</a></li>
                                 </ul>
 
@@ -185,7 +185,7 @@
         </div><!-- container -->
     </section>
 
-    <section class="comment-section">
+    <section class="comment-section" id="comments">
         <div class="container">
             <h4><b>POST COMMENT</b></h4>
             <div class="row">

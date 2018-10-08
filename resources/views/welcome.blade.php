@@ -86,7 +86,7 @@
                                                   style="display: none;">@csrf</form>
                                         @endguest
                                     </li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                    <li><a href="{{route('post.details',$posts[0]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[0]->comments()->count()}}</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$posts[0]->view_count}}</a></li>
                                 </ul>
 
@@ -126,7 +126,7 @@
                                                   action="{{route('post.favorite',$posts[1]->id)}}"
                                                   style="display: none;">@csrf</form>
                                         @endguest</li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                    <li><a href="{{route('post.details',$posts[1]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[1]->comments()->count()}}</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$posts[1]->view_count}}</a></li>
                                 </ul>
                             </div><!-- blog-info -->
@@ -165,7 +165,7 @@
                                               action="{{route('post.favorite',$posts[2]->id)}}"
                                               style="display: none;">@csrf</form>
                                     @endguest</li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="{{route('post.details',$posts[2]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[2]->comments()->count()}}</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[2]->view_count}}</a></li>
                             </ul>
 
@@ -220,7 +220,7 @@
                                                   action="{{route('post.favorite',$posts[3]->id)}}"
                                                   style="display: none;">@csrf</form>
                                         @endguest</li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                    <li><a href="{{route('post.details',$posts[3]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[3]->comments()->count()}}</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$posts[3]->view_count}}</a></li>
                                 </ul>
 
@@ -260,7 +260,7 @@
                                               action="{{route('post.favorite',$posts[4]->id)}}"
                                               style="display: none;">@csrf</form>
                                     @endguest</li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="{{route('post.details',$posts[4]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[4]->comments()->count()}}</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[4]->view_count}}</a></li>
                             </ul>
 
@@ -280,7 +280,7 @@
                                         <a href="#"><b>{{strtoupper($category->name)}}</b></a>
                                     @endforeach
                                 </h6>
-                                <h4 class="title"><a href="{{route('post.details', $posts[5]->slug)}}"><b>{{$posts[5]->title}}</b></a></h4>
+                                <h4 class="title"><a href="{{route('post.details', $posts[5]->slug)}}"><b>{{ucwords($posts[5]->title)}}</b></a></h4>
 
                                 <p>{!! str_limit($posts[5]->body,155,'') !!}</p>
 
@@ -311,7 +311,7 @@
                                                   action="{{route('post.favorite',$posts[5]->id)}}"
                                                   style="display: none;">@csrf</form>
                                         @endguest</li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                    <li><a href="{{route('post.details',$posts[5]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[5]->comments()->count()}}</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$posts[5]->view_count}}</a></li>
                                 </ul>
 
@@ -353,7 +353,7 @@
                                                   action="{{route('post.favorite',$posts[6]->id)}}"
                                                   style="display: none;">@csrf</form>
                                         @endguest</li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                    <li><a href="{{route('post.details',$posts[6]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[6]->comments()->count()}}</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$posts[6]->view_count}}</a></li>
                                 </ul>
                             </div><!-- blog-info -->
@@ -387,7 +387,7 @@
                                               action="{{route('post.favorite',$posts[7]->id)}}"
                                               style="display: none;">@csrf</form>
                                     @endguest</li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="{{route('post.details',$posts[7]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[7]->comments()->count()}}</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[7]->view_count}}</a></li>
                             </ul>
 
@@ -414,7 +414,7 @@
                                               action="{{route('post.favorite',$posts[8]->id)}}"
                                               style="display: none;">@csrf</form>
                                     @endguest</li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="{{route('post.details',$posts[8]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[8]->comments()->count()}}</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[8]->view_count}}</a></li>
                             </ul>
 
@@ -447,7 +447,7 @@
                                               action="{{route('post.favorite',$posts[9]->id)}}"
                                               style="display: none;">@csrf</form>
                                     @endguest</li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="{{route('post.details',$posts[9]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[9]->comments()->count()}}</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[9]->view_count}}</a></li>
                             </ul>
 
@@ -474,7 +474,7 @@
                                               action="{{route('post.favorite',$posts[10]->id)}}"
                                               style="display: none;">@csrf</form>
                                     @endguest</li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="{{route('post.details',$posts[10]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[10]->comments()->count()}}</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts[10]->view_count}}</a></li>
                             </ul>
 
@@ -531,7 +531,7 @@
                                                   action="{{route('post.favorite',$posts[11]->id)}}"
                                                   style="display: none;">@csrf</form>
                                         @endguest</li>
-                                    <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                    <li><a href="{{route('post.details',$posts[11]->slug)}}#comments"><i class="ion-chatbubble"></i>{{$posts[11]->comments()->count()}}</a></li>
                                     <li><a href="#"><i class="ion-eye"></i>{{$posts[11]->view_count}}</a></li>
                                 </ul>
 
