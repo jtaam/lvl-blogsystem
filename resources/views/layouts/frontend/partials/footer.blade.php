@@ -6,7 +6,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="footer-section">
 
-                    <a class="logo" href="#"><img src="{{asset('assets/frontend/images/logo.png')}}" alt="{{config('app.name')}}"></a>
+                    <a class="logo" href="{{route('home')}}"><img src="{{asset('assets/frontend/images/logo.png')}}" alt="{{config('app.name')}}"></a>
                     <p class="copyright">Bona @ 2017. All rights reserved.</p>
                     <p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
                     <ul class="icons">
