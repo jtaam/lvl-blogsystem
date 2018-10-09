@@ -164,6 +164,13 @@
                         <span>Favorite Posts</span>
                     </a>
                 </li>
+                {{--COMMENTS--}}
+                <li class="{{Request::is('author/comment*')?'active':''}}">
+                    <a href="{{route('author.comment.index')}}" class="">
+                        <i class="material-icons">comment</i>
+                        <span>Comments</span>
+                    </a>
+                </li>
                 <li class="header">System</li>
                 {{--SETTINGS--}}
                 <li class="{{Request::is('author/settings')?'active':''}}">
