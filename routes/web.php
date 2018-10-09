@@ -11,6 +11,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('favorite/{post}/add', 'FavoriteController@add')->name('post.favorite');
     Route::post('comment/{post}','CommentController@store')->name('comment.store');
 });
+// Posts by category
+Route::get('category/{slug}','PostController@postByCategory')->name('category.posts');
 // Auth
 Auth::routes();
 
