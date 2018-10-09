@@ -7,8 +7,9 @@
                 <div class="footer-section">
 
                     <a class="logo" href="{{route('home')}}"><img src="{{asset('assets/frontend/images/logo.png')}}" alt="{{config('app.name')}}"></a>
-                    <p class="copyright">Bona @ 2017. All rights reserved.</p>
-                    <p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                    <p class="copyright">{{config('app.name')}} @ 2018. All rights reserved.</p>
+                    <p class="copyright">Designed by <a href="https://colorlib.com" class="text-danger" target="_blank">Colorlib</a> & Developed by
+                        <a href="http://127.0.0.1" class="text-success" target="_blank">jTam</a></p>
                     <ul class="icons">
                         <li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
                         <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
@@ -24,16 +25,9 @@
                 <div class="footer-section">
                     <h4 class="title"><b>CATAGORIES</b></h4>
                     <ul>
-                        {{--@foreach($categories as $category)--}}
-                        {{--<li><a href="#">{{strtoupper($category->name)}}</a></li>--}}
-                        {{--@endforeach--}}
-                        <li><a href="#">CATEGORY</a></li>
-                        <li><a href="#">CATEGORY</a></li>
-                        <li><a href="#">CATEGORY</a></li>
-                        <li><a href="#">CATEGORY</a></li>
-                        <li><a href="#">CATEGORY</a></li>
-                        <li><a href="#">CATEGORY</a></li>
-                        <li><a href="#">CATEGORY</a></li>
+                        @foreach($categories as $category)
+                            <li><a href="{{route('category.posts', $category->slug)}}">{{strtoupper($category->name)}}</a></li>
+                        @endforeach
                     </ul>
                 </div><!-- footer-section -->
             </div><!-- col-lg-4 col-md-6 -->

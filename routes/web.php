@@ -15,6 +15,8 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('category/{slug}','PostController@postByCategory')->name('category.posts');
 // Posts by tag
 Route::get('tag/{slug}','PostController@postByTag')->name('tag.posts');
+// Post Search
+Route::get('search','PostSearchController@search')->name('search');
 // Auth
 Auth::routes();
 
@@ -60,3 +62,8 @@ Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Author', 
     Route::delete('comments/{id}','CommentController@destroy')->name('comment.destroy');
 });
 
+// Footer category
+View::composer('layouts.frontend.partials.footer',function ($view){
+    $categories = App\Category::all();
+    $view->with('categories',$categories);
+});
