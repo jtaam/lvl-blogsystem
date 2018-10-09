@@ -1,6 +1,6 @@
 @extends('layouts.frontend.app')
 
-@section('title','Posts by Category')
+@section('title','Posts by Tag')
 
 @push('css')
     <link rel="stylesheet" href="{{asset('assets/frontend/css/post/styles.css')}}">
@@ -10,7 +10,7 @@
             color: blue;
         }
         .slider {
-            background-image: url({{ Storage::disk('public')->url('category/slider/'.$category->image) }}) !important;
+            {{--background-image: url({{ Storage::disk('public')->url('category/slider/'.$tag->image) }}) !important;--}}
         }
         .posts_pagination {
 
@@ -22,7 +22,7 @@
     <div class="slider">
         <div class="display-table center-text">
             <h1 class="title display-table-cell">
-                <b>{{strtoupper($category->name)}}</b>
+                <b>{{strtoupper($tag->name)}}</b>
             </h1>
         </div>
     </div><!-- slider -->
@@ -31,8 +31,8 @@
         <div class="container">
 
             <div class="row">
-                @if($category->posts->count() > 0)
-                    @foreach($category->posts as $post)
+                @if($tag->posts->count() > 0)
+                    @foreach($tag->posts as $post)
                         <div class="col-lg-4 col-md-6">
                             <div class="card h-100">
                                 <div class="single-post post-style-1">
@@ -75,7 +75,7 @@
                         <div class="card h-100">
                             <div class="single-post post-style-1">
                                 <div class="blog-info">
-                                    <h4 class="title">No post found in this {{$category->name}} category</h4>
+                                    <h4 class="title">No post found in this {{$tag->name}} category</h4>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
 
             </div><!-- row -->
             <div class="posts_pagination">
-                {{--{{$category->posts->links()}}--}}
+                {{--{{$tag->posts->links()}}--}}
             </div>
             {{--<a class="load-more-btn" href="#"><b>LOAD MORE</b></a>--}}
 

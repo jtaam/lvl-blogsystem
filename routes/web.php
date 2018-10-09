@@ -13,6 +13,8 @@ Route::group(['middleware' => ['auth']], function () {
 });
 // Posts by category
 Route::get('category/{slug}','PostController@postByCategory')->name('category.posts');
+// Posts by tag
+Route::get('tag/{slug}','PostController@postByTag')->name('tag.posts');
 // Auth
 Auth::routes();
 
