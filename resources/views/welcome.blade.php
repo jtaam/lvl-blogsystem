@@ -198,7 +198,7 @@
                                                 src="{{ Storage::disk('public')->url('profile/'.$posts[3]->user->image) }}"
                                                 alt="Profile Image"></a>
                                     <div class="right-area">
-                                        <a class="name" href="#"><b>{{$posts[3]->user->name}}</b></a>
+                                        <a class="name" href="{{route('author.profile',$posts[3]->user->username)}}"><b>{{$posts[3]->user->name}}</b></a>
                                         <h6 class="date" href="#">on {{$posts[3]->created_at->format('M d, Y')}}
                                             at {{$posts[3]->created_at->format('g:ia')}}</h6>
                                     </div>
@@ -289,7 +289,7 @@
                                                 src="{{ Storage::disk('public')->url('profile/'.$posts[5]->user->image) }}"
                                                 alt="Profile Image"></a>
                                     <div class="right-area">
-                                        <a class="name" href="#"><b>{{$posts[5]->user->name}}</b></a>
+                                        <a class="name" href="{{route('author.profile',$posts[5]->user->username)}}"><b>{{$posts[5]->user->name}}</b></a>
                                         <h6 class="date" href="#">on {{$posts[5]->created_at->format('M d, Y')}}
                                             at {{$posts[5]->created_at->format('g:ia')}}</h6>
                                     </div>
@@ -509,7 +509,7 @@
                                                 src="{{ Storage::disk('public')->url('profile/'.$posts[11]->user->image) }}"
                                                 alt="Profile Image"></a>
                                     <div class="right-area">
-                                        <a class="name" href="#"><b>{{$posts[11]->user->name}}</b></a>
+                                        <a class="name" href="{{route('author.profile',$posts[11]->user->username)}}"><b>{{$posts[11]->user->name}}</b></a>
                                         <h6 class="date" href="#">on {{$posts[11]->created_at->format('M d, Y')}}
                                             at {{$posts[11]->created_at->format('g:ia')}}</h6>
                                     </div>

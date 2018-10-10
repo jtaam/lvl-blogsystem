@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="middle-area">
-                                    <a class="name" href="#"><b>{{$post->user->name}}</b></a>
+                                    <a class="name" href="{{route('author.profile',$post->user->username)}}"><b>{{$post->user->name}}</b></a>
                                     <h6 class="date">on {{$post->created_at->format('M d, Y')}}
                                         at {{$post->created_at->format('g:ia')}}</h6>
                                 </div>
