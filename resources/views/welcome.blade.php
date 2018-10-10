@@ -185,7 +185,7 @@
 
                                 <h6 class="pre-title">
                                     @foreach($posts[3]->categories as $category)
-                                        <a href="#"><b>{{strtoupper($category->name)}}</b></a>
+                                        <a href="{{route('category.posts',$category->slug)}}"><b>{{strtoupper($category->name)}}</b></a>
                                     @endforeach
                                 </h6>
 
@@ -277,7 +277,7 @@
 
                                 <h6 class="pre-title">
                                     @foreach($posts[5]->categories as $category)
-                                        <a href="#"><b>{{strtoupper($category->name)}}</b></a>
+                                        <a href="{{route('category.posts',$category->slug)}}"><b>{{strtoupper($category->name)}}</b></a>
                                     @endforeach
                                 </h6>
                                 <h4 class="title"><a href="{{route('post.details', $posts[5]->slug)}}"><b>{{ucwords($posts[5]->title)}}</b></a></h4>
@@ -495,7 +495,7 @@
 
                                 <h6 class="pre-title">
                                     @foreach($posts[11]->categories as $category)
-                                        <a href="{{route('post.details', $posts[11]->slug)}}"><b>{{strtoupper($category->name)}}</b></a>
+                                        <a href="{{route('category.posts', $category->slug)}}"><b>{{strtoupper($category->name)}}</b></a>
                                     @endforeach
                                 </h6>
 
