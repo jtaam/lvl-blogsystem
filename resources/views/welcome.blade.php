@@ -59,10 +59,10 @@
                                         src="{{Storage::disk('public')->url('post/'.$posts[0]->image)}}"
                                         alt="{{$posts[0]->title}}"></div>
 
-                            <a class="avatar" href="#"><img
+                            <a class="avatar" href="{{route('author.profile',$posts[0]->user->username)}}"><img
                                         src="{{ Storage::disk('public')->url('profile/'.$posts[0]->user->image) }}"
                                         alt="Profile Image"></a>
-                            {{--<a class="avatar" href="#"><img src="{{asset('profile/'.$posts[0]->user->image)}}" alt="Profile Image"></a>--}}
+                            {{--<a class="avatar" href="{{route('author.profile',$posts[]->user->username)}}"><img src="{{asset('profile/'.$posts[0]->user->image)}}" alt="Profile Image"></a>--}}
 
                             <div class="blog-info">
 
@@ -103,7 +103,7 @@
                                         src="{{Storage::disk('public')->url('post/'.$posts[1]->image)}}"
                                         alt="{{$posts[1]->title}}"></div>
 
-                            <a class="avatar" href="#"><img
+                            <a class="avatar" href="{{route('author.profile',$posts[1]->user->username)}}"><img
                                         src="{{ Storage::disk('public')->url('profile/'.$posts[1]->user->image) }}"
                                         alt="Profile Image"></a>
 
@@ -144,7 +144,7 @@
                                         src="{{Storage::disk('public')->url('post/'.$posts[2]->image)}}"
                                         alt="{{$posts[2]->title}}"></div>
 
-                            <a class="avatar" href="#"><img
+                            <a class="avatar" href="{{route('author.profile',$posts[2]->user->username)}}"><img
                                         src="{{ Storage::disk('public')->url('profile/'.$posts[2]->user->image) }}"
                                         alt="Profile Image"></a>
 
@@ -194,7 +194,7 @@
                                 <p>{!!str_limit($posts[3]->body,155,'')!!}</p>
 
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#"><img
+                                    <a class="avatar" href="{{route('author.profile',$posts[3]->user->username)}}"><img
                                                 src="{{ Storage::disk('public')->url('profile/'.$posts[3]->user->image) }}"
                                                 alt="Profile Image"></a>
                                     <div class="right-area">
@@ -239,7 +239,7 @@
                                         src="{{Storage::disk('public')->url('post/'.$posts[4]->image)}}"
                                         alt="{{$posts[4]->title}}"></div>
 
-                            <a class="avatar" href="#"><img
+                            <a class="avatar" href="{{route('author.profile',$posts[4]->user->username)}}"><img
                                         src="{{ Storage::disk('public')->url('profile/'.$posts[4]->user->image) }}"
                                         alt="Profile Image"></a>
 
@@ -285,7 +285,7 @@
                                 <p>{!! str_limit($posts[5]->body,155,'') !!}</p>
 
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#"><img
+                                    <a class="avatar" href="{{route('author.profile',$posts[5]->user->username)}}"><img
                                                 src="{{ Storage::disk('public')->url('profile/'.$posts[5]->user->image) }}"
                                                 alt="Profile Image"></a>
                                     <div class="right-area">
@@ -330,7 +330,7 @@
                                         src="{{Storage::disk('public')->url('post/'.$posts[6]->image)}}"
                                         alt="{{$posts[6]->title}}"></div>
 
-                            <a class="avatar" href="#"><img
+                            <a class="avatar" href="{{route('author.profile',$posts[6]->user->username)}}"><img
                                         src="{{ Storage::disk('public')->url('profile/'.$posts[6]->user->image) }}"
                                         alt="Profile Image"></a>
 
@@ -505,7 +505,7 @@
                                 <p>{!! str_limit($posts[11]->body,155,'') !!}</p>
 
                                 <div class="avatar-area">
-                                    <a class="avatar" href="#"><img
+                                    <a class="avatar" href="{{route('author.profile',$posts[11]->user->username)}}"><img
                                                 src="{{ Storage::disk('public')->url('profile/'.$posts[11]->user->image) }}"
                                                 alt="Profile Image"></a>
                                     <div class="right-area">

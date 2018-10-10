@@ -40,7 +40,7 @@
                             <div class="post-info">
 
                                 <div class="left-area">
-                                    <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="{{$post->user->name}}"></a>
+                                    <a class="avatar" href="{{route('author.profile',$post->user->username)}}"><img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="{{$post->user->name}}"></a>
                                 </div>
 
                                 <div class="middle-area">
@@ -146,7 +146,7 @@
 
                             <div class="blog-image"><img src="{{ Storage::disk('public')->url('post/'.$randomPost->image) }}" alt="{{$randomPost->title}}"></div>
 
-                            <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$randomPost->user->image) }}" alt="{{$randomPost->user->name}}"></a>
+                            <a class="avatar" href="{{route('author.profile',$randomPost->user->username)}}"><img src="{{ Storage::disk('public')->url('profile/'.$randomPost->user->image) }}" alt="{{$randomPost->user->name}}"></a>
 
                             <div class="blog-info">
 

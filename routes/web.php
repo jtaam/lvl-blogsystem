@@ -17,6 +17,8 @@ Route::get('category/{slug}','PostController@postByCategory')->name('category.po
 Route::get('tag/{slug}','PostController@postByTag')->name('tag.posts');
 // Post Search
 Route::get('search','PostSearchController@search')->name('search');
+// Author profile
+Route::get('profile/{username}','AuthorController@profile')->name('author.profile');
 
 // Auth
 Auth::routes();
