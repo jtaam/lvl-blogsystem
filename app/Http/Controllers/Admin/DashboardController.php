@@ -31,7 +31,8 @@ class DashboardController extends Controller
             ->withCount('favorite_posts')
             ->orderBy('posts_count','desc')
             ->orderBy('comments_count','desc')
-            ->orderBy('favorite_posts_count','desc')->get();
+            ->orderBy('favorite_posts_count','desc')
+            ->take(10)->get();
         $category_count = Category::all()->count();
         $tag_count = Tag::all()->count();
         return view('admin.dashboard',compact('posts','popular_posts','total_pending_posts','all_views','authors_count','new_authors_today','active_authors','category_count','tag_count'));
