@@ -114,18 +114,10 @@
                 </li>
                 {{--AUTHOR--}}
                 <li class="{{Request::is('admin/author*')?'active':''}}">
-                    <a href="javascript:void(0);" class="menu-toggle">
+                    <a href="{{route('admin.author.index')}}">
                         <i class="material-icons">people</i>
                         <span>Authors</span>
                     </a>
-                    <ul class="ml-menu">
-                        <li>
-                            <a href="{{route('admin.author.index')}}"><i class="material-icons">supervised_user_circle</i><span>All Authors</span></a>
-                        </li>
-                        <li>
-                            <a href="{{route('admin.author.create')}}"><i class="material-icons">people_outline</i><span>Add Author</span></a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="header">System</li>
                 {{--SETTINGS--}}
