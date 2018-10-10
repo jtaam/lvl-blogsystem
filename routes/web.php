@@ -17,6 +17,7 @@ Route::get('category/{slug}','PostController@postByCategory')->name('category.po
 Route::get('tag/{slug}','PostController@postByTag')->name('tag.posts');
 // Post Search
 Route::get('search','PostSearchController@search')->name('search');
+
 // Auth
 Auth::routes();
 
@@ -44,6 +45,11 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     // Comment
     Route::get('comments','CommentController@index')->name('comment.index');
     Route::delete('comments/{id}','CommentController@destroy')->name('comment.destroy');
+    // Authors
+    Route::get('authors/','AuthorController@index')->name('author.index');
+    Route::delete('authors/{id}','AuthorController@destroy')->name('author.destroy');
+    Route::get('authors/create','AuthorController@create')->name('author.create');
+    Route::post('authors/store','AuthorController@store')->name('author.store');
 });
 // Author route group
 Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Author', 'middleware' => ['auth', 'author']], function () {
