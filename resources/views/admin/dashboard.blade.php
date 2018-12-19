@@ -1,6 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title','')
+@section('title','Admin')
 
 @push('css')
 @endpush
