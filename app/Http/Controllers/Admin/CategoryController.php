@@ -6,6 +6,7 @@ use App\Category;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Cloudinary;
+use Cloudinary\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -79,6 +80,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->slug = $slug;
         $category->image = $cloudinary_data['secure_url'];
+        $category->public_id = $cloudinary_data['public_id'];
         $category->save();
         Toastr::success('Category saved successfully!', 'Done');
 
@@ -177,12 +179,16 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
-        if (Storage::disk('public')->exists('category/', $category->image)) {
-            Storage::disk('public')->delete('category/' . $category->image);
-        }
-        if (Storage::disk('public')->exists('category/slider/', $category->image)) {
-            Storage::disk('public')->delete('category/slider/' . $category->image);
-        }
+
+        // cloudinary
+        Cloudinary::config(array(
+            "cloud_name" => "jtam",
+            "api_key" => "846885957655443",
+            "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
+        ));
+
+        Cloudinary\Uploader::destroy($category->public_id);
+
         $category->delete();
 
         Toastr::success('Category deleted successfully!', 'Done');
