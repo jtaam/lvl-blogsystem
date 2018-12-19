@@ -10,7 +10,7 @@
             color: blue;
         }
         .slider {
-            background-image: url({{ Storage::disk('public')->url('category/slider/'.$category->image) }}) !important;
+            background-image: url({{$category->image}}) !important;
         }
         .posts_pagination {
 

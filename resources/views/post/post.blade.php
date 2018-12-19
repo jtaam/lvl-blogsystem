@@ -12,7 +12,7 @@
             color: blue;
         }
         .slider {
-            background-image: url({{ Storage::disk('public')->url('category/slider/'.$post->categories[0]->image) }}) !important;
+            background-image: url({{$post->categories[0]->image}}) !important;
         }
     </style>
 @endpush

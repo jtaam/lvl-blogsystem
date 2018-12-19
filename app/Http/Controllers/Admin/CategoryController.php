@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
+use Cloudinary;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -51,24 +52,25 @@ class CategoryController extends Controller
         if (isset($image)) {
             // make unique name for image
             $currentDate = Carbon::now()->toDateString();
-            $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-//            check category directory existence
-            if (!Storage::disk('public')->exists('category')) {
-                Storage::disk('public')->makeDirectory('category');
-            }
-            // resize image for category
-            $category_img = Image::make($image)->resize(1600, 479)->save();
-            // save/upload image to directory
-            Storage::disk('public')->put('category/' . $imagename, $category_img);
+            $imagename = $slug . '-' . $currentDate . '-' . uniqid();
 
-            //            check category sliders directory existence
-            if (!Storage::disk('public')->exists('category/slider')) {
-                Storage::disk('public')->makeDirectory('category/slider');
-            }
-            // resize image for category slider
-            $slider_img = Image::make($image)->resize(500, 333)->save();
-            // save/upload image to slider directory
-            Storage::disk('public')->put('category/slider/' . $imagename, $slider_img);
+            // cloudinary
+            Cloudinary::config(array(
+                "cloud_name" => "jtam",
+                "api_key" => "846885957655443",
+                "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
+            ));
+            $cloudinary_data = null;
+            $cloudinary_data = Cloudinary\Uploader::upload($request->image,
+                array(
+                    "folder" => "laravel/blogsystem/category/",
+                    "public_id" => $imagename,
+                    "width" => 1600,
+                    "height" => 479,
+                    "overwrite" => TRUE,
+                    "resource_type" => "image")
+            );
+
         } else {
             $imagename = 'default.png';
         }
@@ -76,7 +78,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->name;
         $category->slug = $slug;
-        $category->image = $imagename;
+        $category->image = $cloudinary_data['secure_url'];
         $category->save();
         Toastr::success('Category saved successfully!', 'Done');
 
@@ -133,8 +135,8 @@ class CategoryController extends Controller
                 Storage::disk('public')->makeDirectory('category');
             }
             // delete old image
-            if (Storage::disk('public')->exists('category/'.$category->image)){
-                Storage::disk('public')->delete('category/'.$category->image);
+            if (Storage::disk('public')->exists('category/' . $category->image)) {
+                Storage::disk('public')->delete('category/' . $category->image);
             }
             // resize image for category
             $category_img = Image::make($image)->resize(1600, 479)->save();
@@ -146,8 +148,8 @@ class CategoryController extends Controller
                 Storage::disk('public')->makeDirectory('category/slider');
             }
             // delete old slider image
-            if (Storage::disk('public')->exists('category/slider/'.$category->image)){
-                Storage::disk('public')->delete('category/slider/'.$category->image);
+            if (Storage::disk('public')->exists('category/slider/' . $category->image)) {
+                Storage::disk('public')->delete('category/slider/' . $category->image);
             }
             // resize image for category slider
             $slider_img = Image::make($image)->resize(500, 333)->save();
@@ -175,11 +177,11 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
-        if (Storage::disk('public')->exists('category/',$category->image)){
-            Storage::disk('public')->delete('category/'.$category->image);
+        if (Storage::disk('public')->exists('category/', $category->image)) {
+            Storage::disk('public')->delete('category/' . $category->image);
         }
-        if (Storage::disk('public')->exists('category/slider/',$category->image)){
-            Storage::disk('public')->delete('category/slider/'.$category->image);
+        if (Storage::disk('public')->exists('category/slider/', $category->image)) {
+            Storage::disk('public')->delete('category/slider/' . $category->image);
         }
         $category->delete();
 

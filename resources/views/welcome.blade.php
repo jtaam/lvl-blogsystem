@@ -11,6 +11,9 @@
         .favorite_posts {
             color: blue;
         }
+        .category-top-image{
+            height: 203px;
+        }
     </style>
 @endpush
 
@@ -24,9 +27,7 @@
                 @foreach($categories as $key=>$category)
                     <div class="swiper-slide">
                         <a class="slider-category" href="{{route('category.posts',$category->slug)}}">
-                            <div class="blog-image"><img
-                                        src="{{Storage::disk('public')->url('category/slider/'.$category->image)}}"
-                                        alt="{{$category->name}}"></div>
+                            <div class="blog-image"><img src="{{$category->image}}" alt="{{$category->name}}" class="category-top-image"></div>
 
                             <div class="category">
                                 <div class="display-table center-text">

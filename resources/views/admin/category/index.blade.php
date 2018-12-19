@@ -6,9 +6,9 @@
     <!-- JQuery DataTable Css -->
     <link href="{{asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
     <style>
-        .category-slider-image{
+        .category-image{
             width: 80px;
-            height: auto;
+            height: 60px;
         }
     </style>
 @endpush
@@ -63,7 +63,7 @@
                                         <td class="text-center">{{$key+1}}</td>
                                         <td>{{$category->name}}</td>
                                         <td class="text-center">{{$category->posts->count()}}</td>
-                                        <td><img src="{{asset('storage/category/slider/'.$category->image)}}" alt="{{$category->name}}" class="category-slider-image"></td>
+                                        <td><img src="{{$category->image}}" alt="{{$category->name}}" class="category-image"></td>
                                         <td>{{$category->created_at}}</td>
                                         <td>{{$category->updated_at}}</td>
                                         <td>
