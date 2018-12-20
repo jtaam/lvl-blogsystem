@@ -19,7 +19,7 @@
                             EDIT CATEGORY
                         </h2>
                     </div>
-                    <p class="body">
+                    <div class="body">
                         <form action="{{route('admin.category.update',$category->id)}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

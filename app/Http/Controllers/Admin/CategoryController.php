@@ -127,44 +127,50 @@ class CategoryController extends Controller
         // get form image
         $image = $request->file('image');
         $slug = str_slug($request->name);
+
         $category = Category::findOrFail($id);
+
         if (isset($image)) {
             // make unique name for image
             $currentDate = Carbon::now()->toDateString();
-            $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-//            check category directory existence
-            if (!Storage::disk('public')->exists('category')) {
-                Storage::disk('public')->makeDirectory('category');
-            }
-            // delete old image
-            if (Storage::disk('public')->exists('category/' . $category->image)) {
-                Storage::disk('public')->delete('category/' . $category->image);
-            }
-            // resize image for category
-            $category_img = Image::make($image)->resize(1600, 479)->save();
-            // save/upload image to directory
-            Storage::disk('public')->put('category/' . $imagename, $category_img);
+            $imagename = $slug . '-' . $currentDate . '-' . uniqid();
 
-            //            check category sliders directory existence
-            if (!Storage::disk('public')->exists('category/slider')) {
-                Storage::disk('public')->makeDirectory('category/slider');
+            // cloudinary
+            Cloudinary::config(array(
+                "cloud_name" => "jtam",
+                "api_key" => "846885957655443",
+                "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
+            ));
+
+            if (Cloudinary\Uploader::destroy($category->public_id)){
+                $cloudinary_data = null;
+                $cloudinary_data = Cloudinary\Uploader::upload($request->image,
+                    array(
+                        "folder" => "laravel/blogsystem/category/",
+                        "public_id" => $imagename,
+                        "width" => 1600,
+                        "height" => 479,
+                        "overwrite" => TRUE,
+                        "resource_type" => "image")
+                );
+            }else{
+
+            Toastr::error('Category update failed!', 'Error');
+
+            return redirect()->route('admin.category.index');
             }
-            // delete old slider image
-            if (Storage::disk('public')->exists('category/slider/' . $category->image)) {
-                Storage::disk('public')->delete('category/slider/' . $category->image);
-            }
-            // resize image for category slider
-            $slider_img = Image::make($image)->resize(500, 333)->save();
-            // save/upload image to slider directory
-            Storage::disk('public')->put('category/slider/' . $imagename, $slider_img);
+
         } else {
             $imagename = $category->image;
         }
 
         $category->name = $request->name;
         $category->slug = $slug;
-        $category->image = $imagename;
-        $category->save();
+        $category->image = $cloudinary_data['secure_url'];
+        $category->public_id = $cloudinary_data['public_id'];
+
+        $category->update();
+
         Toastr::success('Category updated successfully!', 'Done');
 
         return redirect()->route('admin.category.index');
