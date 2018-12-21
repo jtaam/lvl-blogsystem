@@ -57,7 +57,7 @@
                         <div class="single-post post-style-1">
 
                             <div class="blog-image"><img
-                                        src="{{Storage::disk('public')->url('post/'.$posts[0]->image)}}"
+                                        src="{{$posts[0]->image}}"
                                         alt="{{$posts[0]->title}}"></div>
 
                             <a class="avatar" href="{{route('author.profile',$posts[0]->user->username)}}"><img
@@ -101,7 +101,7 @@
                         <div class="single-post post-style-1">
 
                             <div class="blog-image"><img
-                                        src="{{Storage::disk('public')->url('post/'.$posts[1]->image)}}"
+                                        src="{{$posts[1]->image}}"
                                         alt="{{$posts[1]->title}}"></div>
 
                             <a class="avatar" href="{{route('author.profile',$posts[1]->user->username)}}"><img

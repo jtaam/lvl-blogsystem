@@ -58,7 +58,7 @@
                                 {!! $post->post_promo !!}
                             </p>
                             <br>
-                            <div class="post-image"><img src="{{ Storage::disk('public')->url('post/'.$post->image) }}" alt="{{$post->title}}" /></div>
+                            <div class="post-image"><img src="{{ $post->image }}" alt="{{$post->title}}" /></div>
 
                             <div class="para">
                                 {!! $post->body !!}

@@ -10,6 +10,7 @@ use App\Subscriber;
 use App\Tag;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
+use Cloudinary;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -62,12 +63,30 @@ class PostController extends Controller
         if (isset($image)){
 //            make unique name image
             $currentDate = Carbon::now()->toDateString();
-            $imageName = $slug.'-'.$currentDate.''.uniqid().'.'.$image->getClientOriginalExtension();
-            if (!Storage::disk('public')->exists('post')){
-                Storage::disk('public')->makeDirectory('post');
-            }
-            $resizeImage = Image::make($image)->resize(1600,1066)->save();
-            Storage::disk('public')->put('post/'.$imageName,$resizeImage);
+            $imageName = $slug.'-'.$currentDate.''.uniqid();
+
+            // cloudinary
+            Cloudinary::config(array(
+                "cloud_name" => "jtam",
+                "api_key" => "846885957655443",
+                "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
+            ));
+            $cloudinary_data = null;
+            $cloudinary_data = Cloudinary\Uploader::upload($request->image,
+                array(
+                    "folder" => "laravel/blogsystem/post/",
+                    "public_id" => $imageName,
+                    "width" => 1600,
+                    "height" => 1066,
+                    "overwrite" => TRUE,
+                    "resource_type" => "image")
+            );
+
+//            if (!Storage::disk('public')->exists('post')){
+//                Storage::disk('public')->makeDirectory('post');
+//            }
+//            $resizeImage = Image::make($image)->resize(1600,1066)->save();
+//            Storage::disk('public')->put('post/'.$imageName,$resizeImage);
         }else{
             $imageName='default.png';
         }
@@ -76,7 +95,8 @@ class PostController extends Controller
         $post->title=$request->title;
         $post->slug=$slug;
         $post->post_promo=$request->post_promo;
-        $post->image=$imageName;
+        $post->image=$cloudinary_data['secure_url'];
+        $post->public_id=$cloudinary_data['public_id'];
         $post->body=$request->body;
         if (isset($request->status)){
             $post->status=true;

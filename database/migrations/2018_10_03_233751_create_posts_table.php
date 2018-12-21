@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('slug')->unique();
             $table->text('post_promo')->nullable();
             $table->string('image')->default('default.png');
+            $table->string('public_id')->nullable();
             $table->text('body');
             $table->integer('view_count')->default(0);
             $table->boolean('status')->default(false);
