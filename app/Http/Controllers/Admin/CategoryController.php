@@ -53,24 +53,41 @@ class CategoryController extends Controller
         if (isset($image)) {
             // make unique name for image
             $currentDate = Carbon::now()->toDateString();
-            $imagename = $slug . '-' . $currentDate . '-' . uniqid();
 
-            // cloudinary
-            Cloudinary::config(array(
-                "cloud_name" => "jtam",
-                "api_key" => "846885957655443",
-                "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
-            ));
-            $cloudinary_data = null;
-            $cloudinary_data = Cloudinary\Uploader::upload($request->image,
-                array(
-                    "folder" => "laravel/blogsystem/category/",
-                    "public_id" => $imagename,
-                    "width" => 1600,
-                    "height" => 479,
-                    "overwrite" => TRUE,
-                    "resource_type" => "image")
-            );
+            // LOCAL ENV
+            if (config('app.env') == 'local'){
+                $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            // check category directory existence
+             if (!Storage::disk('public')->exists('category')) {
+                 Storage::disk('public')->makeDirectory('category');
+                }
+             // resize image for category
+                $category_img = Image::make($image)->resize(1600, 479)->save();
+             // save/upload image to directory
+                Storage::disk('public')->put('category/' . $imagename, $category_img);
+            }
+
+            // PRODUCTION ENV
+            if (config('app.env') == 'production'){
+                $imagename = $slug . '-' . $currentDate . '-' . uniqid();
+
+                // cloudinary
+                Cloudinary::config(array(
+                    "cloud_name" => "jtam",
+                    "api_key" => "846885957655443",
+                    "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
+                ));
+                $cloudinary_data = null;
+                $cloudinary_data = Cloudinary\Uploader::upload($request->image,
+                    array(
+                        "folder" => "laravel/blogsystem/category/",
+                        "public_id" => $imagename,
+                        "width" => 1600,
+                        "height" => 479,
+                        "overwrite" => TRUE,
+                        "resource_type" => "image")
+                );
+            }
 
         } else {
             $imagename = 'default.png';
@@ -79,9 +96,17 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->name;
         $category->slug = $slug;
-        $category->image = $cloudinary_data['secure_url'];
-        $category->public_id = $cloudinary_data['public_id'];
+
+        if (config('app.env') == 'local') {
+            $category->image = $imagename;
+        }
+        if (config('app.env') == 'production'){
+            $category->image = $cloudinary_data['secure_url'];
+            $category->public_id = $cloudinary_data['public_id'];
+        }
+
         $category->save();
+
         Toastr::success('Category saved successfully!', 'Done');
 
         return redirect()->route('admin.category.index');
@@ -133,41 +158,67 @@ class CategoryController extends Controller
         if (isset($image)) {
             // make unique name for image
             $currentDate = Carbon::now()->toDateString();
-            $imagename = $slug . '-' . $currentDate . '-' . uniqid();
+            // LOCAL ENV
+            if (config('app.env') == 'local') {
+                $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+                // check category directory existence
+                if (!Storage::disk('public')->exists('category')) {
+                    Storage::disk('public')->makeDirectory('category');
+                    }
+                // delete old image
+                if (Storage::disk('public')->exists('category/' . $category->image)){
+                    Storage::disk('public')->delete('category/'. $category->image);
+                    }
+                // resize image for category
+                $category_img = Image::make($image)->resize(1600, 479)->save();
 
-            // cloudinary
-            Cloudinary::config(array(
-                "cloud_name" => "jtam",
-                "api_key" => "846885957655443",
-                "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
-            ));
+                // save/upload image to directory
+                 Storage::disk('public')->put('category/' . $imagename,$category_img);
+                }
 
-            if (Cloudinary\Uploader::destroy($category->public_id)){
-                $cloudinary_data = null;
-                $cloudinary_data = Cloudinary\Uploader::upload($request->image,
-                    array(
-                        "folder" => "laravel/blogsystem/category/",
-                        "public_id" => $imagename,
-                        "width" => 1600,
-                        "height" => 479,
-                        "overwrite" => TRUE,
-                        "resource_type" => "image")
-                );
-            }else{
+            // PRODUCTION ENV
+            if (config('app.env') == 'production'){
+                $imagename = $slug . '-' . $currentDate . '-' . uniqid();
 
-            Toastr::error('Category update failed!', 'Error');
+                // cloudinary
+                Cloudinary::config(array(
+                    "cloud_name" => "jtam",
+                    "api_key" => "846885957655443",
+                    "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
+                ));
 
-            return redirect()->route('admin.category.index');
+                if (Cloudinary\Uploader::destroy($category->public_id)){
+                    $cloudinary_data = null;
+                    $cloudinary_data = Cloudinary\Uploader::upload($request->image,
+                        array(
+                            "folder" => "laravel/blogsystem/category/",
+                            "public_id" => $imagename,
+                            "width" => 1600,
+                            "height" => 479,
+                            "overwrite" => TRUE,
+                            "resource_type" => "image")
+                    );
+                }else{
+
+                Toastr::error('Category update failed!', 'Error');
+
+                return redirect()->route('admin.category.index');
+                }
+
+            } else {
+                $imagename = $category->image;
             }
-
-        } else {
-            $imagename = $category->image;
         }
 
         $category->name = $request->name;
         $category->slug = $slug;
-        $category->image = $cloudinary_data['secure_url'];
-        $category->public_id = $cloudinary_data['public_id'];
+        if (config('app.env') == 'local') {
+            $category->image = $imagename;
+        }
+        if (config('app.env') == 'production'){
+            $category->image = $cloudinary_data['secure_url'];
+            $category->public_id = $cloudinary_data['public_id'];
+        }
 
         $category->update();
 
@@ -186,18 +237,27 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        // cloudinary
-        Cloudinary::config(array(
-            "cloud_name" => "jtam",
-            "api_key" => "846885957655443",
-            "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
-        ));
-
-        Cloudinary\Uploader::destroy($category->public_id);
+        // LOCAL ENV
+        if (config('app.env') == 'local') {
+            if (Storage::disk('public')->exists('category/', $category->image)){
+                Storage::disk('public')->delete('category/'.$category->image);
+            }
+        }
+        // PRODUCTION ENV
+        if (config('app.env') == 'production'){
+            // cloudinary
+            Cloudinary::config(array(
+                "cloud_name" => "jtam",
+                "api_key" => "846885957655443",
+                "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
+            ));
+            Cloudinary\Uploader::destroy($category->public_id);
+        }
 
         $category->delete();
 
         Toastr::success('Category deleted successfully!', 'Done');
+
         return redirect()->back();
     }
 }

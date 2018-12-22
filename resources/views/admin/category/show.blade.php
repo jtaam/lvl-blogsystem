@@ -60,7 +60,13 @@
                                     <tr>
                                         <td class="text-center">{{$key+1}}</td>
                                         <td>{{$post->title}}</td>
-                                        <td><img src="{{Storage::disk('public')->url('post/'.$post->image)}}" alt="{{$post->image}}" class="category-slider-image"></td>
+                                        <td><img src="
+                                                    @if($post->public_id == null)
+                                                        {{Storage::disk('public')->url('post/'.$post->image)}}
+                                                    @else
+                                                        {{$post->image}}
+                                                    @endif
+                                                " alt="{{$post->title}}" class="category-slider-image"></td>
                                         <td>{{$post->created_at}}</td>
                                         <td>
                                             @if($post->status == true)

@@ -36,7 +36,14 @@
                     <div class="card h-100">
                         <div class="single-post post-style-1">
 
-                            <div class="blog-image"><img src="{{ $post->image }}" alt="{{$post->title}}"></div>
+                            <div class="blog-image">
+                                <img src="
+                                    @if($post->public_id == null)
+                                        {{Storage::disk('public')->url('post/'.$post->image)}}
+                                    @else
+                                        {{$post->image}}
+                                    @endif
+                                " alt="{{$post->title}}"></div>
 
                                 <a class="avatar" href="{{route('author.profile',$post->user->username)}}"><img src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}" alt="{{$post->user->name}}"></a>
 

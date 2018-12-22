@@ -63,7 +63,13 @@
                                         <td class="text-center">{{$key+1}}</td>
                                         <td>{{$category->name}}</td>
                                         <td class="text-center">{{$category->posts->count()}}</td>
-                                        <td><img src="{{$category->image}}" alt="{{$category->name}}" class="category-image"></td>
+                                        <td><img src="
+                                            @if($category->public_id == null)
+                                                {{Storage::disk('public')->url('category/'.$category->image)}}
+                                            @else
+                                                {{$category->image}}
+                                            @endif
+                                        " alt="{{$category->name}}" class="category-image"></td>
                                         <td>{{$category->created_at}}</td>
                                         <td>{{$category->updated_at}}</td>
                                         <td>
