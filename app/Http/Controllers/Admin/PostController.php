@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Http\Controllers\Admin\Settings\CloudinarySettings;
 use App\Notifications\AuthorPostApproved;
 use App\Notifications\NewPostSubscriber;
 use App\Post;
@@ -20,6 +21,13 @@ use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $settings = new CloudinarySettings;
+        $settings->setup_cloudinary();
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -60,58 +68,71 @@ class PostController extends Controller
         ]);
         $image = $request->file('image');
         $slug = str_slug($request->title);
-        if (isset($image)){
+        if (isset($image)) {
 //            make unique name image
             $currentDate = Carbon::now()->toDateString();
-            $imageName = $slug.'-'.$currentDate.''.uniqid();
 
-            // cloudinary
-            Cloudinary::config(array(
-                "cloud_name" => "jtam",
-                "api_key" => "846885957655443",
-                "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
-            ));
-            $cloudinary_data = null;
-            $cloudinary_data = Cloudinary\Uploader::upload($request->image,
-                array(
-                    "folder" => "laravel/blogsystem/post/",
-                    "public_id" => $imageName,
-                    "width" => 1600,
-                    "height" => 1066,
-                    "overwrite" => TRUE,
-                    "resource_type" => "image")
-            );
+            // PRODUCTION ENV
+           if (config('app.env') == 'production') {
+//            if (config('app.env') == 'local') {
+                $imageName = $slug . '-' . $currentDate . '' . uniqid();
 
-//            if (!Storage::disk('public')->exists('post')){
-//                Storage::disk('public')->makeDirectory('post');
-//            }
-//            $resizeImage = Image::make($image)->resize(1600,1066)->save();
-//            Storage::disk('public')->put('post/'.$imageName,$resizeImage);
-        }else{
-            $imageName='default.png';
+                // cloudinary
+                $cloudinary_data = null;
+                $cloudinary_data = Cloudinary\Uploader::upload($request->image,
+                    array(
+                        "folder" => "laravel/blogsystem/post/",
+                        "public_id" => $imageName,
+                        "width" => 1600,
+                        "height" => 1066,
+                        "overwrite" => TRUE,
+                        "resource_type" => "image")
+                );
+            }
+            // LOCAL ENV
+//            if (config('app.env') == 'production') {
+            if (config('app.env') == 'local'){
+                $imageName = $slug . '-' . $currentDate . '' . uniqid() . '-' . $image->getClientOriginalExtension();
+
+                if (!Storage::disk('public')->exists('post')) {
+                    Storage::disk('public')->makeDirectory('post');
+                }
+                $resizeImage = Image::make($image)->resize(1600, 1066)->save();
+                Storage::disk('public')->put('post/' . $imageName, $resizeImage);
+            }
+
+        } else {
+            $imageName = 'default.png';
         }
-        $post= new Post();
-        $post->user_id=Auth::id();
-        $post->title=$request->title;
-        $post->slug=$slug;
-        $post->post_promo=$request->post_promo;
-        $post->image=$cloudinary_data['secure_url'];
-        $post->public_id=$cloudinary_data['public_id'];
-        $post->body=$request->body;
-        if (isset($request->status)){
-            $post->status=true;
-        }else{
-            $post->status=false;
+        $post = new Post();
+        $post->user_id = Auth::id();
+        $post->title = $request->title;
+        $post->slug = $slug;
+        $post->post_promo = $request->post_promo;
+
+        if (config('app.env') == 'local') {
+            $post->image = $imageName;
         }
-        $post->is_approved=true;
+        if (config('app.env') == 'production') {
+            $post->image = $cloudinary_data['secure_url'];
+            $post->public_id = $cloudinary_data['public_id'];
+        }
+
+        $post->body = $request->body;
+        if (isset($request->status)) {
+            $post->status = true;
+        } else {
+            $post->status = false;
+        }
+        $post->is_approved = true;
         $post->save();
 
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
 
         $subscribers = Subscriber::all();
-        foreach ($subscribers as $subscriber){
-            Notification::route('mail',$subscriber->email)
+        foreach ($subscribers as $subscriber) {
+            Notification::route('mail', $subscriber->email)
                 ->notify(new NewPostSubscriber($post));
         }
 
@@ -128,7 +149,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('admin.post.show',compact('post'));
+        return view('admin.post.show', compact('post'));
     }
 
     /**
@@ -141,7 +162,7 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-        return view('admin.post.edit', compact('post','categories', 'tags'));
+        return view('admin.post.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -162,36 +183,36 @@ class PostController extends Controller
         ]);
         $image = $request->file('image');
         $slug = str_slug($request->title);
-        if (isset($image)){
+        if (isset($image)) {
 //            make unique name image
             $currentDate = Carbon::now()->toDateString();
-            $imageName = $slug.'-'.$currentDate.''.uniqid().'.'.$image->getClientOriginalExtension();
-            if (!Storage::disk('public')->exists('post')){
+            $imageName = $slug . '-' . $currentDate . '' . uniqid() . '.' . $image->getClientOriginalExtension();
+            if (!Storage::disk('public')->exists('post')) {
                 Storage::disk('public')->makeDirectory('post');
             }
 //            delete old posts image
-            if (Storage::disk('public')->exists('post/'.$post->image)){
-                Storage::disk('public')->delete('post/'.$post->image);
+            if (Storage::disk('public')->exists('post/' . $post->image)) {
+                Storage::disk('public')->delete('post/' . $post->image);
             }
 //            delete old posts image
-            $resizeImage = Image::make($image)->resize(1600,1066)->save();
-            Storage::disk('public')->put('post/'.$imageName,$resizeImage);
-        }else{
-            $imageName=$post->image;
+            $resizeImage = Image::make($image)->resize(1600, 1066)->save();
+            Storage::disk('public')->put('post/' . $imageName, $resizeImage);
+        } else {
+            $imageName = $post->image;
         }
 
-        $post->user_id=Auth::id();
-        $post->title=$request->title;
-        $post->slug=$slug;
-        $post->post_promo=$request->post_promo;
-        $post->image=$imageName;
-        $post->body=$request->body;
-        if (isset($request->status)){
-            $post->status=true;
-        }else{
-            $post->status=false;
+        $post->user_id = Auth::id();
+        $post->title = $request->title;
+        $post->slug = $slug;
+        $post->post_promo = $request->post_promo;
+        $post->image = $imageName;
+        $post->body = $request->body;
+        if (isset($request->status)) {
+            $post->status = true;
+        } else {
+            $post->status = false;
         }
-        $post->is_approved=true;
+        $post->is_approved = true;
         $post->save();
 
         $post->categories()->sync($request->categories);
@@ -210,8 +231,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if (Storage::disk('public')->exists('post/'.$post->image)){
-            Storage::disk('public')->delete('post/'.$post->image);
+        if (Storage::disk('public')->exists('post/' . $post->image)) {
+            Storage::disk('public')->delete('post/' . $post->image);
         }
         $post->categories()->detach();
         $post->tags()->detach();
@@ -222,28 +243,30 @@ class PostController extends Controller
         return redirect()->route('admin.post.index');
     }
 
-    public function pending(){
-        $posts = Post::where('is_approved',false)->get();
-        return view('admin.post.pending',compact('posts'));
+    public function pending()
+    {
+        $posts = Post::where('is_approved', false)->get();
+        return view('admin.post.pending', compact('posts'));
     }
 
-    public function approval($id){
+    public function approval($id)
+    {
         $post = Post::find($id);
-        if ($post->is_approved == false){
+        if ($post->is_approved == false) {
             $post->is_approved = true;
             $post->save();
 
             $post->user->notify(new AuthorPostApproved($post));
 
             $subscribers = Subscriber::all();
-            foreach ($subscribers as $subscriber){
-                Notification::route('mail',$subscriber->email)
+            foreach ($subscribers as $subscriber) {
+                Notification::route('mail', $subscriber->email)
                     ->notify(new NewPostSubscriber($post));
             }
 
-            Toastr::success('Post approved succesfully!','Done');
-        }else{
-            Toastr::info('This post is already approved!','Info');
+            Toastr::success('Post approved succesfully!', 'Done');
+        } else {
+            Toastr::info('This post is already approved!', 'Info');
         }
         return redirect()->back();
     }

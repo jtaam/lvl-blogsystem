@@ -7,13 +7,23 @@ use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Cloudinary;
 use Cloudinary\Api;
+use App\Http\Controllers\Admin\Settings\CloudinarySettings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
+
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $settings = new CloudinarySettings;
+        $settings->setup_cloudinary();
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -55,28 +65,28 @@ class CategoryController extends Controller
             $currentDate = Carbon::now()->toDateString();
 
             // LOCAL ENV
+//            if (config('app.env') == 'production') {
             if (config('app.env') == 'local'){
                 $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
-            // check category directory existence
-             if (!Storage::disk('public')->exists('category')) {
-                 Storage::disk('public')->makeDirectory('category');
+                // check category directory existence
+                if (!Storage::disk('public')->exists('category')) {
+                    Storage::disk('public')->makeDirectory('category');
                 }
-             // resize image for category
+                // resize image for category
                 $category_img = Image::make($image)->resize(1600, 479)->save();
-             // save/upload image to directory
+                // save/upload image to directory
                 Storage::disk('public')->put('category/' . $imagename, $category_img);
             }
 
             // PRODUCTION ENV
+//            if (config('app.env') == 'local') {
             if (config('app.env') == 'production'){
                 $imagename = $slug . '-' . $currentDate . '-' . uniqid();
 
                 // cloudinary
-                Cloudinary::config(array(
-                    "cloud_name" => "jtam",
-                    "api_key" => "846885957655443",
-                    "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
-                ));
+//                $settings = new CloudinarySettings;
+//                $settings->setup_cloudinary();
+
                 $cloudinary_data = null;
                 $cloudinary_data = Cloudinary\Uploader::upload($request->image,
                     array(
@@ -100,7 +110,7 @@ class CategoryController extends Controller
         if (config('app.env') == 'local') {
             $category->image = $imagename;
         }
-        if (config('app.env') == 'production'){
+        if (config('app.env') == 'production') {
             $category->image = $cloudinary_data['secure_url'];
             $category->public_id = $cloudinary_data['public_id'];
         }
@@ -164,30 +174,24 @@ class CategoryController extends Controller
                 // check category directory existence
                 if (!Storage::disk('public')->exists('category')) {
                     Storage::disk('public')->makeDirectory('category');
-                    }
+                }
                 // delete old image
-                if (Storage::disk('public')->exists('category/' . $category->image)){
-                    Storage::disk('public')->delete('category/'. $category->image);
-                    }
+                if (Storage::disk('public')->exists('category/' . $category->image)) {
+                    Storage::disk('public')->delete('category/' . $category->image);
+                }
                 // resize image for category
                 $category_img = Image::make($image)->resize(1600, 479)->save();
 
                 // save/upload image to directory
-                 Storage::disk('public')->put('category/' . $imagename,$category_img);
-                }
+                Storage::disk('public')->put('category/' . $imagename, $category_img);
+            }
 
             // PRODUCTION ENV
-            if (config('app.env') == 'production'){
+            if (config('app.env') == 'production') {
                 $imagename = $slug . '-' . $currentDate . '-' . uniqid();
 
                 // cloudinary
-                Cloudinary::config(array(
-                    "cloud_name" => "jtam",
-                    "api_key" => "846885957655443",
-                    "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
-                ));
-
-                if (Cloudinary\Uploader::destroy($category->public_id)){
+                if (Cloudinary\Uploader::destroy($category->public_id)) {
                     $cloudinary_data = null;
                     $cloudinary_data = Cloudinary\Uploader::upload($request->image,
                         array(
@@ -198,11 +202,11 @@ class CategoryController extends Controller
                             "overwrite" => TRUE,
                             "resource_type" => "image")
                     );
-                }else{
+                } else {
 
-                Toastr::error('Category update failed!', 'Error');
+                    Toastr::error('Category update failed!', 'Error');
 
-                return redirect()->route('admin.category.index');
+                    return redirect()->route('admin.category.index');
                 }
 
             } else {
@@ -215,7 +219,7 @@ class CategoryController extends Controller
         if (config('app.env') == 'local') {
             $category->image = $imagename;
         }
-        if (config('app.env') == 'production'){
+        if (config('app.env') == 'production') {
             $category->image = $cloudinary_data['secure_url'];
             $category->public_id = $cloudinary_data['public_id'];
         }
@@ -239,18 +243,13 @@ class CategoryController extends Controller
 
         // LOCAL ENV
         if (config('app.env') == 'local') {
-            if (Storage::disk('public')->exists('category/', $category->image)){
-                Storage::disk('public')->delete('category/'.$category->image);
+            if (Storage::disk('public')->exists('category/', $category->image)) {
+                Storage::disk('public')->delete('category/' . $category->image);
             }
         }
         // PRODUCTION ENV
-        if (config('app.env') == 'production'){
+        if (config('app.env') == 'production') {
             // cloudinary
-            Cloudinary::config(array(
-                "cloud_name" => "jtam",
-                "api_key" => "846885957655443",
-                "api_secret" => "A9_WUm6Z6EgxaATJ5gtZ9T95HJw"
-            ));
             Cloudinary\Uploader::destroy($category->public_id);
         }
 

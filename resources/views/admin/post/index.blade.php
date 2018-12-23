@@ -39,8 +39,7 @@
                                         <th>Approved</th>
                                         <th class="text-center"><i class="material-icons">visibility</i></th>
                                         <th>Status</th>
-                                        <th>Created At</th>
-                                        {{--<th>Updated At</th>--}}
+                                        <th>Category</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -52,8 +51,7 @@
                                         <th>Approved</th>
                                         <th class="text-center"><i class="material-icons">visibility</i></th>
                                         <th>Status</th>
-                                        <th>Created At</th>
-                                        {{--<th>Updated At</th>--}}
+                                        <th>Category</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -78,8 +76,17 @@
                                                 <span class="badge bg-pink">Pending</span>
                                             @endif
                                         </td>
-                                        <td>{{$post->created_at}}</td>
-                                        {{--<td>{{$post->updated_at}}</td>--}}
+                                        <td>
+                                            @if (isset($post->categories))
+                                                @foreach ($post->categories as $category)
+                                                    {{$category->name}}
+                                                @endforeach
+                                            @elseif(!isset($post->categories))
+                                                Uncategorized
+                                            @else
+                                                N/A
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="{{route('admin.post.show',$post->id)}}" class="btn btn-sm btn-success waves-effect"><i class="material-icons">visibility</i></a>
                                             <a href="{{route('admin.post.edit',$post->id)}}" class="btn btn-sm btn-info waves-effect"><i class="material-icons">edit</i></a>

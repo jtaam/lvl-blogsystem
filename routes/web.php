@@ -52,6 +52,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     Route::delete('authors/{id}','AuthorController@destroy')->name('author.destroy');
     Route::get('authors/create','AuthorController@create')->name('author.create');
     Route::post('authors/store','AuthorController@store')->name('author.store');
+    // Cloudinary
+    Route::resource('cloudinary', 'CloudinaryController');
 });
 // Author route group
 Route::group(['as' => 'author.', 'prefix' => 'author', 'namespace' => 'Author', 'middleware' => ['auth', 'author']], function () {

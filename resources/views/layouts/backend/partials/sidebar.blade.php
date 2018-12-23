@@ -119,6 +119,13 @@
                         <span>Authors</span>
                     </a>
                 </li>
+                {{--CLOUDINARY--}}
+                <li class="{{Request::is('admin/cloudinary*')?'active':''}}">
+                    <a href="{{route('admin.cloudinary.index')}}">
+                        <i class="material-icons">cloud</i>
+                        <span>Cloudinary</span>
+                    </a>
+                </li>
                 <li class="header">System</li>
                 {{--SETTINGS--}}
                 <li class="{{Request::is('admin/settings')?'active':''}}">
