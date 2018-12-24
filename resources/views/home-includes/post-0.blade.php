@@ -1,4 +1,5 @@
 <div class="single-post post-style-1">
+    @if ($posts)
 
     <div class="blog-image"><img
                 src="{{$posts[0]->image}}"
@@ -38,5 +39,6 @@
         </ul>
 
     </div><!-- blog-info -->
+    @endif
 </div><!-- single-post -->
 
