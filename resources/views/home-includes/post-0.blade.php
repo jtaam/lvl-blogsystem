@@ -1,5 +1,5 @@
 <div class="single-post post-style-1">
-    @if ($posts)
+    @if (isset($posts[0]))
 
     <div class="blog-image"><img
                 src="{{$posts[0]->image}}"
