@@ -20,7 +20,10 @@
                     </div>
                     <div class="content">
                         <div class="text">TOTAL POSTS</div>
-                        <div class="number count-to" data-from="0" data-to="{{$posts->count()}}" data-speed="700" data-fresh-interval="20"></div>
+                        @if (isset($posts))
+                            <div class="number count-to" data-from="0" data-to="{{$posts->count()}}" data-speed="700"
+                                 data-fresh-interval="20"></div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -31,7 +34,8 @@
                     </div>
                     <div class="content">
                         <div class="text">TOTAL FAVORITE</div>
-                        <div class="number count-to" data-from="0" data-to="{{Auth::user()->favorite_posts()->count()}}" data-speed="1000" data-fresh-interval="20"></div>
+                        <div class="number count-to" data-from="0" data-to="{{Auth::user()->favorite_posts()->count()}}"
+                             data-speed="1000" data-fresh-interval="20"></div>
                     </div>
                 </div>
             </div>
@@ -42,7 +46,10 @@
                     </div>
                     <div class="content">
                         <div class="text">PENDING POSTS</div>
-                        <div class="number count-to" data-from="0" data-to="{{$total_pending_posts}}" data-speed="2000" data-fresh-interval="20"></div>
+                        @if (isset($total_pending_posts))
+                            <div class="number count-to" data-from="0" data-to="{{$total_pending_posts}}"
+                                 data-speed="2000" data-fresh-interval="20"></div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -53,7 +60,10 @@
                     </div>
                     <div class="content">
                         <div class="text">TOTAL VIEWS</div>
-                        <div class="number count-to" data-from="0" data-to="{{$all_views}}" data-speed="1000" data-fresh-interval="20"></div>
+                        @if (isset($all_views))
+                            <div class="number count-to" data-from="0" data-to="{{$all_views}}" data-speed="1000"
+                                 data-fresh-interval="20"></div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -69,7 +79,10 @@
                     </div>
                     <div class="content">
                         <div class="text">CATEGORIES</div>
-                        <div class="number count-to" data-from="0" data-to="{{$category_count}}" data-speed="700" data-fresh-interval="20"></div>
+                        @if (isset($category_count))
+                            <div class="number count-to" data-from="0" data-to="{{$category_count}}" data-speed="700"
+                                 data-fresh-interval="20"></div>
+                        @endif
                     </div>
                 </div>
 
@@ -79,7 +92,10 @@
                     </div>
                     <div class="content">
                         <div class="text">TAGS</div>
-                        <div class="number count-to" data-from="0" data-to="{{$tag_count}}" data-speed="700" data-fresh-interval="20"></div>
+                        @if (isset($tag_count))
+                            <div class="number count-to" data-from="0" data-to="{{$tag_count}}" data-speed="700"
+                                 data-fresh-interval="20"></div>
+                        @endif
                     </div>
                 </div>
 
@@ -89,7 +105,10 @@
                     </div>
                     <div class="content">
                         <div class="text">AUTHORS</div>
-                        <div class="number count-to" data-from="0" data-to="{{$authors_count}}" data-speed="700" data-fresh-interval="20"></div>
+                        @if (isset($authors_count))
+                            <div class="number count-to" data-from="0" data-to="{{$authors_count}}" data-speed="700"
+                                 data-fresh-interval="20"></div>
+                        @endif
                     </div>
                 </div>
 
@@ -99,7 +118,10 @@
                     </div>
                     <div class="content">
                         <div class="text">TODAY AUTHORS</div>
-                        <div class="number count-to" data-from="0" data-to="{{$new_authors_today}}" data-speed="700" data-fresh-interval="20"></div>
+                        @if (isset($new_authors_today))
+                            <div class="number count-to" data-from="0" data-to="{{$new_authors_today}}" data-speed="700"
+                                 data-fresh-interval="20"></div>
+                        @endif
                     </div>
                 </div>
 
@@ -112,40 +134,43 @@
                     <div class="body">
                         <table class="table table-responsive dashboard-task-infos">
                             <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Views</th>
-                                    <th>Favorite</th>
-                                    <th>Comments</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Views</th>
+                                <th>Favorite</th>
+                                <th>Comments</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
                             </thead>
                             <tbody>
+                            @if (isset($popular_posts))
                                 @foreach($popular_posts as $key=>$post)
-                                <tr>
-                                    <td>{{$key+1}}</td>
-                                    <td>{{str_limit($post->title,20)}}</td>
-                                    <td>{{$post->user->name}}</td>
-                                    <td>{{$post->view_count}}</td>
-                                    <td>{{$post->favorite_posts_count}}</td>
-                                    <td>{{$post->comments_count}}</td>
-                                    <td>
-                                        @if($post->status == true)
-                                            <span class="label bg-green">Published</span>
-                                        @else
-                                            <span class="label bg-red">Pending</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a href="{{route('post.details',$post->slug)}}" class="btn btn-sm btn-primary" target="_blank">
-                                            <i class="material-icons">visibility</i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>{{$key+1}}</td>
+                                        <td>{{str_limit($post->title,20)}}</td>
+                                        <td>{{$post->user->name}}</td>
+                                        <td>{{$post->view_count}}</td>
+                                        <td>{{$post->favorite_posts_count}}</td>
+                                        <td>{{$post->comments_count}}</td>
+                                        <td>
+                                            @if($post->status == true)
+                                                <span class="label bg-green">Published</span>
+                                            @else
+                                                <span class="label bg-red">Pending</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{route('post.details',$post->slug)}}"
+                                               class="btn btn-sm btn-primary" target="_blank">
+                                                <i class="material-icons">visibility</i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                 @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -165,15 +190,16 @@
                         <div class="table-responsive">
                             <table class="table table-hover dashboard-task-infos">
                                 <thead>
-                                    <tr>
-                                        <th>Rank</th>
-                                        <th>Name</th>
-                                        <th>Posts</th>
-                                        <th>Comments</th>
-                                        <th>Favorite</th>
-                                    </tr>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Name</th>
+                                    <th>Posts</th>
+                                    <th>Comments</th>
+                                    <th>Favorite</th>
+                                </tr>
                                 </thead>
                                 <tbody>
+                                @if (isset($active_authors))
                                     @foreach($active_authors as $key=>$author)
                                         <tr>
                                             <td>{{$key+1}}</td>
@@ -183,6 +209,7 @@
                                             <td>{{$author->favorite_posts_count}}</td>
                                         </tr>
                                     @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>
