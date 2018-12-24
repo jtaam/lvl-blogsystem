@@ -41,8 +41,8 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'tamjid-it.com'),
-            'port' => env('DB_PORT', '3306'),
+            'host' => env('DB_HOST', 'http://66.117.3.9'),
+            'port' => env('DB_PORT', '2082'),
             'database' => env('DB_DATABASE', 'tamjidit_laravel_blogsystem'),
             'username' => env('DB_USERNAME', 'tamjidit_laravel_blogsystem'),
             'password' => env('DB_PASSWORD', 'n3RIO9ZA+D[0'),
