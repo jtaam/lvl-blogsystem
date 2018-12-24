@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'sqlite'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,10 +42,10 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'tamjid-it.com'),
-            'port' => env('DB_PORT', '2082'),
-            'database' => env('DB_DATABASE', 'tamjidit_laravel_blogsystem'),
-            'username' => env('DB_USERNAME', 'tamjidit_laravel_blogsystem'),
-            'password' => env('DB_PASSWORD', 'n3RIO9ZA+D[0'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'localhost'),
+            'username' => env('DB_USERNAME', 'localhost'),
+            'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
