@@ -11,20 +11,22 @@
             @guest()
                 <li><a href="{{route('login')}}">Login</a></li>
             @else
-                @if(Auth::user()->role->id == 1)
-                    <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                    <li><a href="{{route('logout')}}" onclick="event.preventDefault();
-                         document.getElementById('logout-form').submit();">Logout</a></li>
+                @if (isset(Auth::user()->role->id))
+                    @if(Auth::user()->role->id == 1)
+                        <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                        <li><a href="{{route('logout')}}" onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">Logout</a></li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                    @elseif(Auth::user()->role->id == 2)
+                        <li><a href="{{route('author.dashboard')}}">Dashboard</a></li>
+                        <li><a href="{{route('logout')}}" onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">Logout</a></li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-                @elseif(Auth::user()->role->id == 2)
-                    <li><a href="{{route('author.dashboard')}}">Dashboard</a></li>
-                    <li><a href="{{route('logout')}}" onclick="event.preventDefault();
-                         document.getElementById('logout-form').submit();">Logout</a></li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                    @endif
                 @endif
             @endguest
         </ul><!-- main-menu -->
