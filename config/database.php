@@ -48,7 +48,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'http://66.117.3.9'),
+            'host' => env('DB_HOST', '66.117.3.9'),
             'port' => env('DB_PORT', '2082'),
             'database' => env('DB_DATABASE', 'tamjidit_laravel_blogsystem'),
             'username' => env('DB_USERNAME', 'tamjidit_laravel_blogsystem'),
