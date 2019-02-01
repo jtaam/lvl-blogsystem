@@ -1,7 +1,11 @@
 <div class="single-post post-style-2">
     @if (isset($posts[11]))
         <div class="blog-image"><img
+                    @if (config('app.env') =='production')
+                    src="{{$posts[11]->image}}"
+                    @else
                     src="{{Storage::disk('public')->url('post/'.$posts[11]->image)}}"
+                    @endif
                     alt="{{$posts[11]->title}}"></div>
 
         <div class="blog-info">

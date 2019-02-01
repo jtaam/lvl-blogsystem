@@ -1,7 +1,11 @@
 <div class="single-post post-style-1">
     @if (isset($posts[6]))
         <div class="blog-image"><img
+                    @if (config('app.env') =='production')
+                    src="{{$posts[6]->image}}"
+                    @else
                     src="{{Storage::disk('public')->url('post/'.$posts[6]->image)}}"
+                    @endif
                     alt="{{$posts[6]->title}}"></div>
 
         <a class="avatar" href="{{route('author.profile',$posts[6]->user->username)}}"><img
