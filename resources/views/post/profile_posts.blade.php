@@ -32,8 +32,12 @@
                                     <div class="single-post post-style-1">
 
                                         <div class="blog-image"><img
-                                                    src="{{ Storage::disk('public')->url('post/'.$post->image) }}"
-                                                    alt="{{$post->title}}"></div>
+                                                    @if (config('app.env') =='production')
+                                                        src="{{$post->image}}"
+                                                    @else
+                                                        src="{{ Storage::disk('public')->url('post/'.$post->image) }}"
+                                                    @endif
+                                                        alt="{{$post->title}}"></div>
 
                                         <a class="avatar" href="{{route('author.profile',$post->user->username)}}"><img
                                                     src="{{ Storage::disk('public')->url('profile/'.$post->user->image) }}"
