@@ -2,7 +2,7 @@
     @if (isset($posts[2]))
         <div class="blog-image">
             <img
-                    @if (config('app.env'=='production'))
+                    @if (config('app.env') =='production')
                         src="{{$posts[2]->image}}"
                     @else
                         src="{{Storage::disk('public')->url('post/'.$posts[2]->image)}}"
