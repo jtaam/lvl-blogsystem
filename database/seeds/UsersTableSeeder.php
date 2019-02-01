@@ -12,19 +12,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'role_id'=>'1',
-            'name'=>'Mr Admin',
-            'username'=>'admin',
-            'email'=>'admin@example.net',
-            'password'=> bcrypt('admin'),
-        ]);
-        DB::table('users')->insert([
-            'role_id'=>'2',
-            'name'=>'Mr Author',
-            'username'=>'author',
-            'email'=>'author@example.net',
-            'password'=> bcrypt('author'),
-        ]);
+        factory(\App\User::class, 20)->create();
     }
 }
