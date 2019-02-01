@@ -1,7 +1,9 @@
 @extends('layouts.frontend.app')
 
 @section('title')
-    {{ucwords($post->title)}}
+    @if (isset($post))
+        {{ucwords($post->title)}}
+    @endif
 @endsection
 
 @push('css')
@@ -13,10 +15,9 @@
         }
 
         .slider {
-            @if($post)
-             background-image: url({{$post->categories[0]->image}}) !important;
-        @endif
-
+            @if(isset($post))
+                background-image: url({{$post->categories[0]->image}}) !important;
+            @endif
         }
     </style>
 @endpush
@@ -25,8 +26,7 @@
     <div class="slider">
         <div class="display-table  center-text">
             <h1 class="title display-table-cell">
-                @if($post)
-
+                @if(isset($post))
                     <b>{{ucwords($post->categories[0]->name)}}</b>
                 @endif
 
@@ -35,7 +35,7 @@
     </div><!-- slider -->
 
     <section class="post-area section">
-        @if($post)
+        @if(isset($post))
 
             <div class="container">
 
