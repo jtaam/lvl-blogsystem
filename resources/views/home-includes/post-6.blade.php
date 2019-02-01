@@ -8,9 +8,14 @@
                     @endif
                     alt="{{$posts[6]->title}}"></div>
 
-        <a class="avatar" href="{{route('author.profile',$posts[6]->user->username)}}"><img
+        <a class="avatar" href="{{route('author.profile',$posts[6]->user->username)}}">
+            <img
+                    @if (config('app.env') =='production')
+                    src="{{$posts[6]->user->image}}"
+                    @else
                     src="{{ Storage::disk('public')->url('profile/'.$posts[6]->user->image) }}"
-                    alt="Profile Image"></a>
+                    @endif
+                    alt="{{$posts[6]->user->username}}">
 
         <div class="blog-info">
             <h4 class="title"><a href="{{route('post.details', $posts[6]->slug)}}"><b>{{ucwords($posts[6]->title)}}</b></a>

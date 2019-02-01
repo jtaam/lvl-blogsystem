@@ -5,8 +5,14 @@
                 src="{{$posts[0]->image}}"
                 alt="{{$posts[0]->title}}"></div>
 
-    <a class="avatar" href="{{route('author.profile',$posts[0]->user->username)}}"><img
-                src="{{ Storage::disk('public')->url('profile/'.$posts[0]->user->image) }}"
+    <a class="avatar" href="{{route('author.profile',$posts[0]->user->username)}}">
+        <img
+                @if (config('app.env') =='production')
+                    src="{{$posts[0]->user->image}}"
+                @else
+                    src="{{ Storage::disk('public')->url('profile/'.$posts[0]->user->image) }}"
+                @endif
+
                 alt="Profile Image"></a>
     {{--<a class="avatar" href="{{route('author.profile',$posts[]->user->username)}}"><img src="{{asset('profile/'.$posts[0]->user->image)}}" alt="Profile Image"></a>--}}
 

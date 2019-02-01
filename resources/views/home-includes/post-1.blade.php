@@ -4,9 +4,15 @@
                     src="{{$posts[1]->image}}"
                     alt="{{$posts[1]->title}}"></div>
 
-        <a class="avatar" href="{{route('author.profile',$posts[1]->user->username)}}"><img
-                    src="{{ Storage::disk('public')->url('profile/'.$posts[1]->user->image) }}"
-                    alt="Profile Image"></a>
+        <a class="avatar" href="{{route('author.profile',$posts[1]->user->username)}}">
+            <img
+                    @if (config('app.env') =='production')
+                        src="{{$posts[1]->user->image}}"
+                    @else
+                        src="{{ Storage::disk('public')->url('profile/'.$posts[1]->user->image) }}"
+                    @endif
+                    alt="{{$posts[1]->user->username}}">
+        </a>
 
         <div class="blog-info">
             <h4 class="title"><a href="{{route('post.details', $posts[1]->slug)}}"><b>{{ucwords($posts[1]->title)}}</b></a>

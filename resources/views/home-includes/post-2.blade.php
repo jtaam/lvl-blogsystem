@@ -10,9 +10,15 @@
                     alt="{{$posts[2]->title}}">
         </div>
 
-        <a class="avatar" href="{{route('author.profile',$posts[2]->user->username)}}"><img
-                    src="{{ Storage::disk('public')->url('profile/'.$posts[2]->user->image) }}"
-                    alt="Profile Image"></a>
+        <a class="avatar" href="{{route('author.profile',$posts[2]->user->username)}}">
+            <img
+                    @if (config('app.env') =='production')
+                        src="{{$posts[2]->user->image}}"
+                    @else
+                        src="{{ Storage::disk('public')->url('profile/'.$posts[2]->user->image) }}"
+                    @endif
+                        alt="{{$posts[2]->user->username}}">
+        </a>
 
         <h4 class="title"><a href="{{route('post.details', $posts[2]->slug)}}"><b>{{ucwords($posts[2]->title)}}</b></a>
         </h4>

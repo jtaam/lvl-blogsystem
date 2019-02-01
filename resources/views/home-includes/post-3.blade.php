@@ -22,9 +22,15 @@
             <p>{!!str_limit($posts[3]->body,155,'')!!}</p>
 
             <div class="avatar-area">
-                <a class="avatar" href="{{route('author.profile',$posts[3]->user->username)}}"><img
+                <a class="avatar" href="{{route('author.profile',$posts[3]->user->username)}}">
+                    <img
+                            @if (config('app.env') =='production')
+                            src="{{$posts[3]->user->image}}"
+                            @else
                             src="{{ Storage::disk('public')->url('profile/'.$posts[3]->user->image) }}"
-                            alt="Profile Image"></a>
+                            @endif
+                            alt="{{$posts[3]->user->username}}">
+                </a>
                 <div class="right-area">
                     <a class="name"
                        href="{{route('author.profile',$posts[3]->user->username)}}"><b>{{$posts[3]->user->name}}</b></a>
