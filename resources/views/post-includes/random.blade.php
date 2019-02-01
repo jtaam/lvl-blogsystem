@@ -9,7 +9,7 @@
                             @if($category->public_id == null)
                                 {{Storage::disk('public')->url('post/'.$randomPost->image)}}
                             @else
-                                {{$post->image}}
+                                {{$randomPost->image}}
                             @endif
                             " alt="{{$randomPost->title}}"></div>
 
